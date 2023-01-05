@@ -1,0 +1,22 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# OS files
+.DS_Store
+
+# git history files
+.history
+
+# Build Directory
+dist
+
+# Environment variables file
+.env

@@ -1,6 +1,5 @@
 import Label from './Label';
 
+export type { TProps as TLabelProps } from './Label';
 export { Label };
-export type { IProps as ILabelProps } from './Label';
-
 export default Label;

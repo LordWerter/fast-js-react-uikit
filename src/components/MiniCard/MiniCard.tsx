@@ -1,27 +1,37 @@
 import React from 'react';
-import { useTheme } from '@emotion/react';
-import { Link } from 'react-router-dom';
-import { mergeThemeObjects } from '../../utils';
-import { CWrap, Image, Title } from './MiniCard.styles';
-import { TSize } from '../../definitions/IPropTypes';
 
-export interface IProps {
-    sizeId?: TSize;
+import { useTheme } from '@emotion/react';
+
+import { TSize } from '../../definitions/IPropTypes';
+import { mergeThemeObjects } from '../../utils';
+import { CWrap } from './MiniCard.styles';
+
+export type TNode = {
+    name: string;
+    tag: string;
+    text?: string;
+    src?: string; // relative or absolute path to img file || base64 img string || url to img file
+    href?: string; // link for route
+    handleOnClick?: React.MouseEventHandler<HTMLElement>;
+};
+
+export type TFCTheme = {
+
+};
+
+export type TProps = {
+    sizeId: TSize;
+    data: TNode[];
     customize?: any;
-    data?: any;
     handleOnClick?: any;
 }
 
 
-export const MiniCard: React.FC<IProps> = (props): JSX.Element => {
+export const MiniCard: React.FC<TProps> = (props): JSX.Element => {
     const {
         sizeId = 'mobile',
         customize = {},
-        data = {
-            link: '/',
-            imageId: 'default',
-            caption: 'default',
-        },
+        data = [],
         handleOnClick,
     } = props;
 
@@ -40,11 +50,17 @@ export const MiniCard: React.FC<IProps> = (props): JSX.Element => {
             onClick={() => {
                 handleOnClick && handleOnClick();
             }}>
-            {data.link ? <Link to={data.link} /> : <></>}
-            <Image sizeId={sizeId} imageId={data.imageId} theme={theme.image} />
-            <Title sizeId={sizeId} theme={theme.title}>
-                {data.caption}
-            </Title>
+            {!!data.length && data.map((targetNode: TNode) => {
+                const {name, tag, text, src, href, handleOnClick } = targetNode;
+                const CurNode = nodesDict[tag];
+                const nodeProps = {
+                    sizeId,
+                    theme: theme[name.toLowerCase()],
+                };
+                return (<CurNode {...nodeProps} >
+                    {text && text}
+                </CurNode>);
+            })}
         </CWrap>
     );
 };

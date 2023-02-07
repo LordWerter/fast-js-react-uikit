@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
+
 import { useTheme } from '@emotion/react';
+
 import { TSize } from '../../definitions/IPropTypes';
 import { mergeThemeObjects } from '../../utils';
-import { CWrap, SelectedItem, Item } from './Dropbox.styles';
+import {
+    CWrap,
+    Item,
+    SelectedItem,
+} from './Dropbox.styles';
 
-export interface IProps {
+export type TProps = {
     defaultItem: any;
     sizeId?: TSize;
     customize?: any;
     data?: any;
+    children?: any;
 }
 
-export const Dropbox: React.FC<IProps> = (props): JSX.Element => {
+export const Dropbox: React.FC<TProps> = (props): JSX.Element => {
     const { defaultItem, data, sizeId = 'mobile', customize = {}, children } = props;
 
     const [selectedItem, setSelectedItem] = useState(defaultItem);

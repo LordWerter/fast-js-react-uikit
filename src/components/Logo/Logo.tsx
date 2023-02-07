@@ -1,8 +1,14 @@
 import React from 'react';
+
 import { useTheme } from '@emotion/react';
-import { mergeThemeObjects } from '../../utils';
-import { CWrap, Image, Text } from './Logo.styles';
+
 import { TSize } from '../../definitions/IPropTypes';
+import { mergeThemeObjects } from '../../utils';
+import {
+    CWrap,
+    Image,
+    Text,
+} from './Logo.styles';
 
 export type TLogoRenderType =
     | 'ICON__COLOR'
@@ -43,13 +49,13 @@ export interface ILogoDescriptor {
     text?: TFontMode | null;
 }
 
-export interface IProps {
+export type TProps = {
     sizeId?: TSize;
     customize?: any;
     curID: TLogoRenderType;
 }
 
-const Logo = (props: IProps) => {
+export const Logo: React.FC<TProps> = (props): JSX.Element => {
     const { sizeId = 'mobile', customize = {}, curID } = props;
 
     const idArr = curID.split('__');

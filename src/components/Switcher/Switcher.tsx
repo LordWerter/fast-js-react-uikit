@@ -1,60 +1,66 @@
-import React, { useState, FocusEventHandler, FocusEvent } from 'react';
-import { useTheme } from '@emotion/react';
-import { mergeThemeObjects } from '../../utils';
-import { CWrap, Roller } from './Switcher.styles';
+import React, {
+    MouseEventHandler,
+    useState,
+} from 'react';
+
+import { SwitcherElems } from '../../constants';
 import { TSize } from '../../definitions/IPropTypes';
+import {
+    genFCElems,
+    getFCTheme,
+} from '../../utils';
 
 export type SwitcherEvent<T> = (event: T, data?: { name?: string; value: boolean }) => void;
 export interface IProps {
     sizeId?: TSize;
+    langs?: {
+        leftLabel?: string;
+        rightLabel?: string;
+    }
     customize?: any;
     isEnabled?: boolean;
     isDisabled?: boolean;
-    onBlur?: FocusEventHandler<HTMLInputElement>;
-    onFocus?: FocusEventHandler<HTMLInputElement>;
-    onChange?: SwitcherEvent<React.ChangeEvent<HTMLInputElement>>;
-    callback?: any;
+    onClick: MouseEventHandler<HTMLElement>;
 }
 
 export const Switcher: React.FC<IProps> = (props): JSX.Element => {
     const {
-        children,
         sizeId = 'mobile',
         customize = {},
         isEnabled = false,
         isDisabled = false,
-        onChange,
-        onBlur,
-        onFocus,
+        onClick,
+        langs = {
+            leftLabel: '',
+            rightLabel: '',
+        }
     } = props;
 
     const [isEnable, setIsEnable] = useState(isEnabled);
-    // @ts-ignore
-    const theme = { ...useTheme().components.Switcher };
-    Object.keys(theme).forEach((key: string) => {
-        theme[key] = mergeThemeObjects(theme[key], customize[key]);
-    });
+
+    const { CWrap, Track, Roller, Input, LeftLabel, RightLabel } = genFCElems(SwitcherElems);
+    const theme = getFCTheme({ FCName: 'Switcher', nodeNames: ['cwrap', 'leftlabel', 'track', 'roller', 'rightlabel'], customize });
+
 
     return (
         <CWrap
             sizeId={sizeId}
-            theme={theme.container}
-            isDisabled={isDisabled}
-            isEnabled={isEnable}
-            onClick={() => {
+            theme={theme.cwrap}
+            className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}
+            onClick={(event: React.MouseEvent<HTMLInputElement>): void => {
                 setIsEnable(!isEnable);
-            }}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                onChange && onChange(event);
-            }}
-            onBlur={(event: FocusEvent<HTMLInputElement>) => {
-                onBlur && onBlur(event);
-            }}
-            onFocus={(event: FocusEvent<HTMLInputElement>) => {
-                onFocus && onFocus(event);
+                onClick(event);
             }}>
-            <Roller sizeId={sizeId} theme={theme.roller} isEnabled={isEnable} isDisabled={isDisabled} />
-            {children}
+                {!!langs?.leftLabel && (<LeftLabel sizeId={sizeId} theme={theme.leftlabel} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}>{langs.leftLabel}</LeftLabel>)}
+                <Track
+                    sizeId={sizeId} theme={theme.track} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}
+                    onClick={(event: React.MouseEvent<HTMLElement>) => {
+                        onClick(event);
+                    }}>
+                    <Roller sizeId={sizeId} theme={theme.roller} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`} />
+                </Track>
+                {!!langs?.rightLabel && (<RightLabel sizeId={sizeId} theme={theme.rightlabel} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}>{langs.rightLabel}</RightLabel>)}
+                <Input type={'checkbox'} checked={isEnable} hidden={true} />
         </CWrap>
     );
 };

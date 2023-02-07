@@ -1,23 +1,33 @@
 import React from 'react';
-import { init } from '@rematch/core';
-import { storiesOf } from '@storybook/react';
+
+import {
+    ComponentMeta,
+    ComponentStory,
+} from '@storybook/react';
+
+import { mockedTheme } from '../../constants';
 import StoryWrapper from '../../containers/StoryWrapper';
 import Checkbox from './Checkbox';
 
-const store1 = init({ models: {} });
+// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+export default {
+  title: 'Checkbox',
+  component: Checkbox,
+} as ComponentMeta<typeof Checkbox>;
 
-const stories = storiesOf('Checkbox', module);
-
-stories.add('Basic', () => (
-    <StoryWrapper store={store1} theme={{}} initialEntries={['/']}>
-        <Checkbox
-            hash={'sergwergsdrgser'}
-            sizeId={'mobile'}
-            label={'Отправить чек на e-mail'}
-            customize={{}}
-            onChange={() => {
-                console.log('onChange event is working');
-            }}
-        />
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof Checkbox> = (args) => (
+    <StoryWrapper theme={mockedTheme} initialEntries={['/']}>
+        <Checkbox {...args} />
     </StoryWrapper>
-));
+);
+
+export const Basic = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Basic.args = {
+    id: 'CHECKBOX',
+    text: 'Help me',
+    sizeId: 'mobile',
+    customize: {},
+    onClick: () => console.warn('Checkbox onClick is OK!')
+};

@@ -1,6 +1,6 @@
 import MiniCard from './MiniCard';
 
-export type { IProps as IMiniCardProps } from './MiniCard';
+export type { TProps as TMiniCardProps } from './MiniCard';
 export { MiniCard };
 
 export default MiniCard;

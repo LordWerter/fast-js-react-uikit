@@ -1,10 +1,9 @@
-export type TSize = 'mobile' | 'laptop' | 'desktop';
+export type TSize = 'mobile' | 'tablet' | 'desktop';
 
 export type TTextBlockType = 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' | 'P';
 
 export interface TComponentElementProps {
-    sizeId: TSize;
-    theme?: any;
+    theme: any;
 }
 
 export type TTagName = 'a' | 'abbr' | 'address' | 'area' | 'article' | 'aside' | 'audio' | 'b' | 'base' | 'bdi' |

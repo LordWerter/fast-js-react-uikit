@@ -1,51 +1,72 @@
-import React from 'react';
-import { useTheme } from '@emotion/react';
-import { mergeThemeObjects } from '../../utils';
-import { CWrap, Value, Btn } from './Counter.styles';
-import { TSize } from '../../definitions/IPropTypes';
+import React, { useState } from 'react';
 
-export interface IProps {
-    sizeId?: TSize;
+import { CounterElems } from '../../constants';
+import { TSize } from '../../definitions/IPropTypes';
+import {
+    genFCElems,
+    getFCTheme,
+} from '../../utils';
+
+export type TProps = {
+    sizeId: TSize;
+    countParams: {
+        initValue: number;
+        measure: number;
+        minLimit: number;
+        maxLimit: number;
+    };
     customize?: any;
-    productCode: string;
-    count: number;
-    handleMinusCount: (productCode: string) => any;
-    handlePlusCount: (productCode: string) => any;
+    idPrefix?: string;
+    idPostfix?: string;
+    handleIncrement: (curValue: number) => unknown;
+    handleDecrement: (curValue: number) => unknown;
 }
 
-export const Counter: React.FC<IProps> = (props): JSX.Element => {
-    const { sizeId = 'mobile', customize = {}, count, productCode, handleMinusCount, handlePlusCount } = props;
-    // @ts-ignore
-    const theme = { ...useTheme().components.Counter };
-    const requiredThemeKeys = ['container', 'button', 'value', 'images'];
+export const Counter: React.FC<TProps> = (props): JSX.Element => {
+    const {
+        sizeId = 'mobile', customize = {},
+        countParams: { initValue, measure, minLimit, maxLimit },
+        handleIncrement, handleDecrement
+    } = props;
+    const [value, setValue] = useState<number>(initValue);
+    const [isDisabledUpBtn, disableUpBtn] = useState<boolean>(false);
+    const [isDisabledDownBtn, disableDownBtn] = useState<boolean>(false);
 
-    requiredThemeKeys.forEach((curKey) => {
-        theme[curKey] = mergeThemeObjects(theme[curKey], customize[curKey]);
-    });
+    const { CWrap, Value, Btn } = genFCElems(CounterElems);
+    const theme = getFCTheme({ FCName: 'Counter', nodeNames: ['cwrap', 'btn', 'value'], customize });
 
     return (
-        <CWrap sizeId={sizeId} theme={mergeThemeObjects(theme.container, customize.container)}>
+        <CWrap sizeId={sizeId} theme={theme.cwrap}>
             <Btn
                 sizeId={sizeId}
-                theme={mergeThemeObjects(theme.button, customize.button)}
-                style={{
-                    backgroundImage: `url('${theme.images.minus}')`,
-                }}
+                theme={theme.btn}
+                className={`isDecrement ${isDisabledDownBtn ? 'isDisabled' : ''}`}
                 onClick={() => {
-                    handleMinusCount(productCode);
+                    if (isDisabledDownBtn) return;
+                    if (isDisabledUpBtn) disableUpBtn(false);
+                    let curValue = value - measure;
+                    curValue = curValue > minLimit ? curValue : minLimit;
+                    if (curValue === minLimit) disableDownBtn(true);
+
+                    setValue(curValue);
+                    handleDecrement(curValue);
                 }}
             />
-            <Value sizeId={sizeId} theme={mergeThemeObjects(theme.value, customize.value)}>
-                {count}
+            <Value sizeId={sizeId} theme={theme.value}>
+                {value}
             </Value>
             <Btn
                 sizeId={sizeId}
-                theme={mergeThemeObjects(theme.button, customize.button)}
-                style={{
-                    backgroundImage: `url('${theme.images.plus}')`,
-                }}
+                theme={theme.btn}
+                className={`isIncrement ${isDisabledUpBtn ? 'isDisabled' : ''}`}
                 onClick={() => {
-                    handlePlusCount(productCode);
+                    if (isDisabledUpBtn) return;
+                    if (isDisabledDownBtn) disableDownBtn(false);
+                    let curValue = value + measure;
+                    curValue = curValue < maxLimit ? curValue : maxLimit;
+                    if (curValue === maxLimit) disableUpBtn(true);
+                    setValue(curValue);
+                    handleIncrement(curValue);
                 }}
             />
         </CWrap>

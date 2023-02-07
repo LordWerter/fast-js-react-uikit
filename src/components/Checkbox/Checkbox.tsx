@@ -1,11 +1,23 @@
-import React, { MouseEventHandler } from 'react';
-import { useTheme } from '@emotion/react';
-import { genComponentElement } from '../../utils';
+import React from 'react';
+
+import { CheckboxElems } from '../../constants';
+import { TSize } from '../../definitions/IPropTypes';
+/**
+ * imports of utils
+ */
+import {
+    genFCElems,
+    getFCTheme,
+} from '../../utils';
 
 export type ValueType = string | number;
 
 export type TProps<V = ValueType> = {
-    sizeId?: TSize;
+    id: string;
+    sizeId: TSize;
+    isChecked: boolean;
+    idPrefix?: string;
+    idPostfix?: string;
     customize?: any;
     typeToken?: string | null;
 
@@ -53,56 +65,45 @@ export type TProps<V = ValueType> = {
 
     /** Called when the user attempts to change the checked state. */
     onChange?: (
-        value: V | undefined,
-        checked: boolean,
-        event: React.ChangeEvent<HTMLInputElement>
+        // value: V | undefined,
+        // checked: boolean,
+        event: Event
     ) => void;
 
     /** Called when the checkbox or label is clicked. */
-    onLabelClick?: MouseEventHandler<HTMLElement>;
-
-    /** Called when the checkbox is clicked. */
-    onCheckboxClick?: MouseEventHandler<HTMLElement>;
+    onClick?: (evt?: Event) => unknown;
 };
 
 /**
- * imports of utils
- */
-import { mergeThemeObjects } from '../../utils';
-import { TSize } from '../../definitions/IPropTypes';
-
-/**
- * renders CheckboxButton Item
+ * renders Checkbox Instance
  * @param {Object} props implements IProps
  * @type {Function}
  * @returns {JSX.Element}
  */
-export const CheckboxButton: React.FC<TProps> = (props): JSX.Element => {
-    const { text, onLabelClick, sizeId = 'mobile', customize = {}, typeToken = null } = props;
+export const Checkbox: React.FC<TProps> = (props): JSX.Element => {
+    const { id, sizeId = 'mobile', isChecked, text, onClick, onChange, customize = {}, typeToken = null } = props;
 
-    const CWrap = genComponentElement('button');
-    const Caption = genComponentElement('span');
+    const { CWrap, CheckBtn, CheckIcon, Label } = genFCElems(CheckboxElems);
+    const theme = getFCTheme({
+            FCName: 'Checkbox', typeToken, 
+            nodeNames: ['cwrap', 'checkbtn', 'checkicon', 'label'], customize
+        });
 
-    // @ts-ignore
-    const componentStylesObj = { ...useTheme().components.Button };
-    const targetTheme = typeToken ? { ...componentStylesObj[typeToken] } : { ...componentStylesObj };
-    const requiredNodeNames = ['cwrap', 'caption'];
-    const theme: any = {};
-
-    requiredNodeNames.forEach((curKey: string) => {
-        theme[curKey] = mergeThemeObjects(targetTheme[curKey], customize[curKey]);
-    });
-
-    // TODO: add hover effect
     return (
-        <CWrap sizeId={sizeId} theme={theme.container}>
-            {text && (
-                <Caption sizeId={sizeId} theme={theme.caption} onClick={onLabelClick}>
-                    {text}
-                </Caption>
-            )}
+        <CWrap sizeId={sizeId} theme={theme.cwrap} onClick={(evt: Event) => {
+            if (onClick) onClick(evt);
+        }}>
+            <CheckBtn
+                id={id} type={'checkbox'} checked={isChecked} hidden 
+                sizeId={sizeId} theme={theme.checkbtn}
+                onChange={(evt: Event) => {
+                    if (onChange) onChange(evt);
+                }}
+            />
+            <CheckIcon className={isChecked ? 'isChecked' : ''} sizeId={sizeId} theme={theme.checkicon} />
+            {text && (<Label htmlFor={id} sizeId={sizeId} theme={theme.label}>{text}</Label>)}
         </CWrap>
     );
 };
 
-export default CheckboxButton;
+export default Checkbox;

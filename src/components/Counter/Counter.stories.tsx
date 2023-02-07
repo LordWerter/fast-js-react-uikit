@@ -1,36 +1,42 @@
-import React, { useState } from 'react';
-import { init } from '@rematch/core';
-import { storiesOf } from '@storybook/react';
+import React from 'react';
+
+import {
+    ComponentMeta,
+    ComponentStory,
+} from '@storybook/react';
+
+import { mockedTheme } from '../../constants';
 import StoryWrapper from '../../containers/StoryWrapper';
 import Counter from './Counter';
 
-const store1 = init({ models: {} });
+// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+export default {
+  title: 'Counter',
+  component: Counter,
+} as ComponentMeta<typeof Counter>;
 
-const stories = storiesOf('Counter', module);
-
-const TestCounter = () => {
-    const [count, setCount] = useState(5);
-    return (
-        <Counter
-            count={count}
-            productCode={'vodkaStolich05'}
-            handleMinusCount={(productCode: string) => {
-                setCount(count > 0 ? count - 1 : 0);
-                console.log(`minus ${productCode}`);
-                console.log(count);
-            }}
-            handlePlusCount={(productCode: string) => {
-                setCount(count + 1);
-                console.log(`plus ${productCode}`);
-                console.log(count);
-            }}
-            customize={{}}
-        />
-    );
-};
-
-stories.add('Basic', () => (
-    <StoryWrapper store={store1} theme={{}} initialEntries={['/']}>
-        <TestCounter />
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof Counter> = (args) => (
+    <StoryWrapper theme={mockedTheme} initialEntries={['/']}>
+        <Counter {...args} />
     </StoryWrapper>
-));
+);
+
+export const Basic = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Basic.args = {
+    sizeId: 'mobile',
+    customize: {},
+    countParams: {
+        initValue: 0,
+        measure: 1,
+        maxLimit: 10,
+        minLimit: -10,
+    },
+    handleIncrement: (curValue: number) => {
+        console.warn(`Value after incrementing is ${curValue}`);
+    },
+    handleDecrement: (curValue: number) => {
+        console.warn(`Value after decrementing is ${curValue}`);
+    },
+};

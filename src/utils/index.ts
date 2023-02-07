@@ -1,3 +1,6 @@
-export { default as mergeThemeObjects } from './mergeThemeObjects';
-export { default as getResultStyles } from './getResultStyles';
-export { default as genComponentElement } from './genComponentElement';
+export { genComponentElement } from './genComponentElement';
+export { genFCElems } from './genFCElems';
+export { getElemNodeCST } from './getElemNodeCST';
+export { getFCTheme } from './getFCTheme';
+export { getResultStyles } from './getResultStyles';
+export { mergeThemeObjects } from './mergeThemeObjects';

@@ -1,5 +1,9 @@
-import React from 'react';
-import { useTheme } from '@emotion/react';
+import React, { ReactNode } from 'react';
+
+import {
+    genFCElems,
+    getFCTheme,
+} from '../../utils';
 
 export interface ICWrapProps {
     padding: string;
@@ -11,43 +15,37 @@ export interface ICWrapProps {
     onClick: (event: any) => void;
 }
 
-import { CWrap } from './Modal.styles';
-
 export type EventHandler = (event?: Event) => void;
 
-export interface IProps {
+export type TProps = {
     text: string;
-    sizeId?: string;
+    sizeId: string;
     customize?: any;
-    showWindow?: any;
+    showWindow: any;
+    children?: ReactNode;
+    handleOnClose?: (event?: Event) => void;
 }
-/**
- * imports of utils
- */
-import { mergeThemeObjects } from '../../utils';
 
 /**
- * renders BasicButton Item
+ * renders Modal
  * @param {Object} props implements IProps
  * @type {Function}
  * @returns {JSX.Element}
  */
-export const Modal: React.FC<any> = (props): JSX.Element => {
-    const { sizeId = 'xl', customize = {}, children } = props;
+export const Modal: React.FC<TProps> = (props): JSX.Element => {
+    const { sizeId, customize = {}, children } = props;
 
-    const requiredThemeKeys = ['container', 'modalwinwrap'];
+    const requiredThemeKeys = ['cwrap', 'modalwrap', 'closebtn'];
 
-    // @ts-ignore
-    const theme: { [key in string]: any } = { ...useTheme().components.Modal };
+    const { CWrap, ModalWrap, CloseBtn } = genFCElems([{ name: 'CWrap', tag: 'div' }, { name: 'ModalWrap', tag: 'div' }, { name: 'CloseBtn', tag: 'div' }]);
+    const theme = getFCTheme({ FCName: 'Modal', nodeNames: [...requiredThemeKeys], customize });
 
-    requiredThemeKeys.forEach((curKey) => {
-        theme[curKey] = mergeThemeObjects(theme[curKey], customize[curKey]);
-    });
-
-    // TODO: add hover effect
     return (
-        <CWrap sizeId={sizeId} theme={theme.container}>
-            {children}
+        <CWrap sizeId={sizeId} theme={theme.cwrap}>
+            <ModalWrap sizeId={sizeId} theme={theme.modalwrap} role="dialog">
+                {children}
+                <CloseBtn sizeId={sizeId} theme={theme.closebtn} />
+            </ModalWrap>
         </CWrap>
     );
 };

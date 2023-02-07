@@ -1,33 +1,32 @@
-import React, { useState, ChangeEvent } from 'react';
-import { useTheme } from '@emotion/react';
-import { mergeThemeObjects } from '../../../utils';
-import { CWrap, InputWrap, Label, InputBox, Placeholder, Notice } from './Input.styles';
+import React, {
+    ChangeEvent,
+    useState,
+} from 'react';
+
+import { InputElems } from '../../../constants';
 import { TSize } from '../../../definitions/IPropTypes';
+import {
+    genFCElems,
+    getFCTheme,
+} from '../../../utils';
 
 export type TLabel = {
     text: string;
     params: unknown;
 };
 
-export interface IProps {
-    sizeId?: TSize;
+export type TProps = {
+    sizeId: TSize;
     label?: any;
     value?: string;
     placeholder?: string | null;
     disabled?: boolean;
-    theme?: {
-        wrapper: any;
-        label?: any;
-        input?: any;
-        placeholder?: any;
-    } | null;
     customize?: any;
-    withReset2EmptyValueBtn?: boolean;
-    handleReset2EmptyValueBtn?: () => any;
+    handleReset?: () => any;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => any | null;
 }
 
-export const Input: React.FC<IProps> = (props): JSX.Element => {
+export const Input: React.FC<TProps> = (props): JSX.Element => {
     const {
         sizeId = 'mobile',
         value = '',
@@ -40,16 +39,13 @@ export const Input: React.FC<IProps> = (props): JSX.Element => {
 
     const [isActive, setIsActive] = useState(false);
 
-    // @ts-ignore
-    const theme = { ...useTheme().components.InputBox };
-    const requiredThemeKeys = ['container', 'label', 'inputwrap', 'input', 'placeholder', 'images'];
-
-    requiredThemeKeys.forEach((curKey) => {
-        theme[curKey] = mergeThemeObjects(theme[curKey], customize[curKey]);
-    });
+    const { CWrap, Label, InputWrap, InputBox, Placeholder, Notice } = genFCElems(InputElems);
+    const theme = getFCTheme({
+            FCName: 'Checkbox', nodeNames: ['cwrap', 'label', 'inputwrap', 'input', 'placeholder', 'notice'], customize
+        });
 
     return (
-        <CWrap sizeId={sizeId} theme={theme.container}>
+        <CWrap sizeId={sizeId} theme={theme.cwrap}>
             {label ? (
                 <Label sizeId={sizeId} theme={theme.label}>
                     {label.text}
@@ -57,10 +53,11 @@ export const Input: React.FC<IProps> = (props): JSX.Element => {
             ) : (
                 <></>
             )}
-            <InputWrap sizeId={sizeId} theme={isActive ? theme.states.isActive.inputwrap : theme.inputwrap}>
+            <InputWrap sizeId={sizeId} theme={theme.inputwrap} className={isActive ? 'isActive' : ''}>
                 <InputBox
                     sizeId={sizeId}
-                    theme={isActive ? theme.states.isActive.input : theme.input}
+                    theme={theme.input}
+                    className={isActive ? 'isActive' : ''}
                     value={value}
                     disabled={disabled}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {

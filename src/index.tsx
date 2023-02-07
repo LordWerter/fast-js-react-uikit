@@ -1,14 +1,14 @@
 export { Button } from './components/Button';
 export type { IButtonProps } from './components/Button';
 
-export { Checkbox } from './components/Checkbox/Checkbox';
-export type { ICheckboxProps } from './components/Checkbox';
+export { Checkbox } from './components/Checkbox';
+export type { TCheckboxProps } from './components/Checkbox';
 
-export { CheckBoxBar } from './containers/CheckBoxBar';
-export type { ICheckBoxBarProps } from './containers/CheckBoxBar';
+export { CheckBoxBar } from './containers/CheckboxGroup';
+export type { ICheckBoxBarProps } from './containers/CheckboxGroup';
 
-export { Counter } from './components/Counter';
-export type { ICounterProps } from './components/Counter';
+export { SymbCount } from './components/SymbCount';
+export type { TSymbCountProps } from './components/SymbCount';
 
 export { Dropbox } from './components/Dropbox';
 export type { IDropboxProps } from './components/Dropbox';
@@ -16,19 +16,11 @@ export type { IDropboxProps } from './components/Dropbox';
 export { Image } from './components/Image';
 export type { IImageProps } from './components/Image';
 
-export { Input } from './components/Inputbox';
-export type { IInputProps } from './components/Inputbox';
+export { Input, Input4Search, InputWithMask } from './components/Inputbox';
+export type { IInput4SearchProps, IInputProps, IInputWithMaskProps } from './components/Inputbox';
 
-export { InputWithMask } from './components/Inputbox';
-export type { IInputWithMaskProps } from './components/Inputbox';
-
-export { Input4Search } from './components/Inputbox';
-export type { IInput4SearchProps } from './components/Inputbox';
-
-export { SymbKeyboard } from './components/Keyboard';
+export { Number as NumKeyboard, SymbKeyboard } from './components/Keyboard';
 export type { ISymbKeyboardProps } from './components/Keyboard';
-
-export { Number as NumKeyboard } from './components/Keyboard';
 
 export { Label } from './components/Label';
 export type { ILabelProps } from './components/Label';

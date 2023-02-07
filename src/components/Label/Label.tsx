@@ -1,15 +1,21 @@
 import React from 'react';
-import { useTheme } from '@emotion/react';
-import { mergeThemeObjects } from '../../utils';
-import { CWrap, Prefix, Postfix } from './Label.styles';
 
-export interface IProps {
+import { useTheme } from '@emotion/react';
+
+import { mergeThemeObjects } from '../../utils';
+import {
+    CWrap,
+    Postfix,
+    Prefix,
+} from './Label.styles';
+
+export type TProps = {
     text: number | string;
     sizeId?: any;
     customize?: any;
 }
 
-export const Label: React.FC<IProps> = (props): JSX.Element => {
+export const Label: React.FC<TProps> = (props): JSX.Element => {
     const { text, sizeId = 'mobile', customize = {} } = props;
 
     // @ts-ignore

@@ -1,39 +1,48 @@
 import React from 'react';
 
-import { useTheme } from '@emotion/react';
-
-import { mergeThemeObjects } from '../../utils';
+import { LabelElems } from '../../constants';
 import {
-    CWrap,
-    Postfix,
-    Prefix,
-} from './Label.styles';
+    genFCElems,
+    getElemNodeCST,
+    getFCTheme,
+} from '../../utils';
 
-export type TProps = {
+export interface Props {
     text: number | string;
+    prefix: string,
+    postfix: string,
     sizeId?: any;
     customize?: any;
+    typeToken?: string | null;
+    hlaToken?: string;
+    actionToken?: string;
 }
 
-export const Label: React.FC<TProps> = (props): JSX.Element => {
-    const { text, sizeId = 'mobile', customize = {} } = props;
+export const Label: React.FC<Props> = (props): JSX.Element => {
+    const { text, prefix, postfix, sizeId = 'mobile', customize = {}, typeToken = null, hlaToken, actionToken } = props;
 
-    // @ts-ignore
-    const theme = { ...useTheme().components.Label };
-    const requiredThemeKeys = ['container', 'prefix', 'postfix', 'images'];
+    const nodeNameList = ['CWrap', 'Prefix', 'Postfix'];
 
-    requiredThemeKeys.forEach((curKey) => {
-        theme[curKey] = mergeThemeObjects(theme[curKey], customize[curKey]);
+    const { CWrap, Prefix, Postfix } = genFCElems(LabelElems);
+    const theme = getFCTheme({
+        FCName: 'Dropbox', typeToken, 
+        nodeNames: [...nodeNameList], customize
     });
 
+    const testIds = {
+        CWrap: getElemNodeCST(`SWITCH_BTN__CWRAP`, hlaToken, actionToken),
+        Prefix: getElemNodeCST(`SWITCH_BTN__PREFIX`, hlaToken, actionToken),
+        Postfix: getElemNodeCST(`SWITCH_BTN__POSTFIX`, hlaToken, actionToken),
+    };
+
     return (
-        <CWrap sizeId={sizeId} theme={theme.container}>
-            <Prefix sizeId={sizeId} theme={theme.prefix}>
-                {}
+        <CWrap sizeId={sizeId} theme={theme.CWrap} data-testid={testIds.CWrap}>
+            <Prefix sizeId={sizeId} theme={theme.Prefix} data-testid={testIds.Prefix}>
+                {prefix}
             </Prefix>
             {text}
-            <Postfix sizeId={sizeId} theme={theme.postfix}>
-                {}
+            <Postfix sizeId={sizeId} theme={theme.Postfix} data-testid={testIds.Postfix}>
+                {postfix}
             </Postfix>
         </CWrap>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTheme } from '@emotion/react';
 
-import { TSize } from '../../definitions/IPropTypes';
+import { TSize } from '../../definitions/proptypes';
 import { mergeThemeObjects } from '../../utils';
 import {
     CWrap,
@@ -49,13 +49,13 @@ export interface ILogoDescriptor {
     text?: TFontMode | null;
 }
 
-export type TProps = {
+export interface Props {
     sizeId?: TSize;
     customize?: any;
     curID: TLogoRenderType;
 }
 
-export const Logo: React.FC<TProps> = (props): JSX.Element => {
+export const Logo: React.FC<Props> = (props): JSX.Element => {
     const { sizeId = 'mobile', customize = {}, curID } = props;
 
     const idArr = curID.split('__');
@@ -83,7 +83,7 @@ export const Logo: React.FC<TProps> = (props): JSX.Element => {
             )}
             {type !== 'SINGLE' && type !== 'ICON' ? (
                 <Text sizeId={sizeId} theme={theme.text}>
-                    {theme.text.value}
+                    {theme.text.Value}
                 </Text>
             ) : (
                 <></>

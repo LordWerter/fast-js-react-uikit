@@ -3,33 +3,34 @@ import React, {
     useState,
 } from 'react';
 
-import { SwitcherElems } from '../../constants';
-import { TSize } from '../../definitions/IPropTypes';
+import { Switcher as nodeList } from 'constants';
+import { TSize } from 'definitions';
+
 import {
     genFCElems,
     getFCTheme,
 } from '../../utils';
 
-export type SwitcherEvent<T> = (event: T, data?: { name?: string; value: boolean }) => void;
-export interface IProps {
-    sizeId?: TSize;
+export type SwitcherEvent<T> = (event: T, data?: { name?: string; Value: boolean }) => void;
+export interface Props {
+    sizeId: TSize;
     langs?: {
         leftLabel?: string;
         rightLabel?: string;
     }
     customize?: any;
-    isEnabled?: boolean;
+    isEnabled: boolean;
     isDisabled?: boolean;
-    onClick: MouseEventHandler<HTMLElement>;
+    handleOnClick: MouseEventHandler<HTMLElement>;
 }
 
-export const Switcher: React.FC<IProps> = (props): JSX.Element => {
+export const Switcher: React.FC<Props> = (props): JSX.Element => {
     const {
         sizeId = 'mobile',
         customize = {},
         isEnabled = false,
         isDisabled = false,
-        onClick,
+        handleOnClick,
         langs = {
             leftLabel: '',
             rightLabel: '',
@@ -38,28 +39,28 @@ export const Switcher: React.FC<IProps> = (props): JSX.Element => {
 
     const [isEnable, setIsEnable] = useState(isEnabled);
 
-    const { CWrap, Track, Roller, Input, LeftLabel, RightLabel } = genFCElems(SwitcherElems);
-    const theme = getFCTheme({ FCName: 'Switcher', nodeNames: ['cwrap', 'leftlabel', 'track', 'roller', 'rightlabel'], customize });
+    const { CWrap, Track, Roller, Input, LeftLabel, RightLabel } = genFCElems(nodeList);
+    const theme = getFCTheme({ FCName: 'Switcher', nodeNames: ['CWrap', 'leftLabel', 'track', 'roller', 'rightLabel'], customize });
 
 
     return (
         <CWrap
             sizeId={sizeId}
-            theme={theme.cwrap}
+            theme={theme.CWrap}
             className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}
             onClick={(event: React.MouseEvent<HTMLInputElement>): void => {
                 setIsEnable(!isEnable);
-                onClick(event);
+                handleOnClick(event);
             }}>
-                {!!langs?.leftLabel && (<LeftLabel sizeId={sizeId} theme={theme.leftlabel} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}>{langs.leftLabel}</LeftLabel>)}
+                {!!langs?.leftLabel && (<LeftLabel sizeId={sizeId} theme={theme.leftLabel} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}>{langs.leftLabel}</LeftLabel>)}
                 <Track
                     sizeId={sizeId} theme={theme.track} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}
                     onClick={(event: React.MouseEvent<HTMLElement>) => {
-                        onClick(event);
+                        handleOnClick(event);
                     }}>
                     <Roller sizeId={sizeId} theme={theme.roller} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`} />
                 </Track>
-                {!!langs?.rightLabel && (<RightLabel sizeId={sizeId} theme={theme.rightlabel} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}>{langs.rightLabel}</RightLabel>)}
+                {!!langs?.rightLabel && (<RightLabel sizeId={sizeId} theme={theme.rightLabel} className={`${isEnable ? 'isOn' : 'isOff'}${isDisabled ? ' isDisabled' : ''}`}>{langs.rightLabel}</RightLabel>)}
                 <Input type={'checkbox'} checked={isEnable} hidden={true} />
         </CWrap>
     );

@@ -1,10 +1,10 @@
 import {
-    RADIO_BTN__ACTIVE,
-    RADIO_BTN__PASSIVE,
+    RADIO_Btn__ACTIVE,
+    RADIO_Btn__PASSIVE,
 } from './imgs';
 
 export const theme = {
-    cwrap: {
+    CWrap: {
         core: {
             display: 'flex',
             fontFamily: 'system-ui',
@@ -13,7 +13,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    radiobtn: {
+    radioBtn: {
         core: {},
         mobile: {},
         tablet: {},
@@ -28,12 +28,12 @@ export const theme = {
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             backgroundColor: 'transparent',
-            backgroundImage: `url('${RADIO_BTN__PASSIVE}')`,
+            backgroundImage: `url('${RADIO_Btn__PASSIVE}')`,
             borderRadius: '2px',
             overflow: 'hidden',
 
             '&.isActive': {
-                backgroundImage: `url('${RADIO_BTN__ACTIVE}')`,
+                backgroundImage: `url('${RADIO_Btn__ACTIVE}')`,
             },
 
         },
@@ -41,7 +41,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    label: {
+    Label: {
         core: {},
         mobile: {},
         tablet: {},

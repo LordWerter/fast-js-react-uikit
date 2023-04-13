@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTheme } from '@emotion/react';
 
-import { TSize } from '../../definitions/IPropTypes';
+import { TSize } from '../../definitions/proptypes';
 import {
     CWrap,
     Description,
@@ -25,7 +25,7 @@ export const Section: React.FC<IProps> = (props): JSX.Element => {
     const theme = { ...useTheme().Section[sectionType] };
 
     return (
-        <CWrap sizeId={sizeId} theme={theme.cwrap} data-testid={'section__cwrap'}>
+        <CWrap sizeId={sizeId} theme={theme.CWrap} data-testid={'section__CWrap'}>
             <SectionContent sizeId={sizeId} theme={theme.sectioncontent} data-testid={'section__section-content'}>
                 {langs?.title && <Title sizeId={sizeId} theme={theme.title} data-testid={'section__title'}>
                     {langs.title}

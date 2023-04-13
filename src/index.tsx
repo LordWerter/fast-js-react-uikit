@@ -16,8 +16,8 @@ export type { IDropboxProps } from './components/Dropbox';
 export { Image } from './components/Image';
 export type { IImageProps } from './components/Image';
 
-export { Input, Input4Search, InputWithMask } from './components/Inputbox';
-export type { IInput4SearchProps, IInputProps, IInputWithMaskProps } from './components/Inputbox';
+export { Input, Input4Search, InputWithMask } from './components/InputBox';
+export type { IInput4SearchProps, IInputProps, IInputWithMaskProps } from './components/InputBox';
 
 export { Number as NumKeyboard, SymbKeyboard } from './components/Keyboard';
 export type { ISymbKeyboardProps } from './components/Keyboard';

@@ -1,11 +1,11 @@
 export const theme = {
-    cwrap: {
+    CWrap: {
         core: {
             fontFamily: 'system-ui',
             fontSize: '18px',
             fontWeight: 400,
             lineHeight: '48px',
-            color: '#FFF',
+            color: '#fff',
             padding: '0px 16px',
             backgroundColor: '#008eff',
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.4)',

@@ -4,13 +4,13 @@ import React from 'react';
  * imports of utils
  */
 import { BasicButtonElems } from '../../constants';
-import { TSize } from '../../definitions/IPropTypes';
+import { TSize } from '../../definitions/proptypes';
 import {
     genFCElems,
     getFCTheme,
 } from '../../utils';
 
-export type TProps = {
+export interface Props {
     text: string;
     sizeId?: TSize;
     customize?: any;
@@ -24,17 +24,17 @@ export type TProps = {
  * @type {Function}
  * @returns {JSX.Element}
  */
-export const BasicButton: React.FC<TProps> = (props): JSX.Element => {
+export const Dropzone: React.FC<Props> = (props): JSX.Element => {
     const { text, onClick, sizeId = 'mobile', customize = {}, typeToken = null } = props;
 
     const { CWrap, Caption } = genFCElems(BasicButtonElems);
-    const theme = getFCTheme({ FCName: 'Button', typeToken, nodeNames: ['cwrap', 'caption'], customize });
+    const theme = getFCTheme({ FCName: 'Button', typeToken, nodeNames: ['CWrap', 'Caption'], customize });
 
     // TODO: add hover effect
     return (
-        <CWrap sizeId={sizeId} theme={theme.cwrap} onClick={onClick}>
+        <CWrap sizeId={sizeId} theme={theme.CWrap} onClick={onClick}>
             {text && (
-                <Caption sizeId={sizeId} theme={theme.caption}>
+                <Caption sizeId={sizeId} theme={theme.Caption}>
                     {text}
                 </Caption>
             )}
@@ -42,4 +42,4 @@ export const BasicButton: React.FC<TProps> = (props): JSX.Element => {
     );
 };
 
-export default BasicButton;
+export default Dropzone;

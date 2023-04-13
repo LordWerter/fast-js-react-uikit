@@ -1,6 +1,6 @@
 # Label Component
 
-- [Label Component](#label-component)
+- [Label Component](#Label-component)
   - [Description](#description)
   - [Component Props](#component-props)
   - [Usage](#usage)
@@ -14,7 +14,7 @@ This component creates a custom Label on got props.
 
 |   Name    |                      Type                       | Description              |         Example         |
 | :-------: | :---------------------------------------------: | ------------------------ | :---------------------: |
-|   text    |              `number` \| `string`               | Value of Label component |     `'Some value'`      |
+|   text    |              `number` \| `string`               | Value of Label component |     `'Some Value'`      |
 |  sizeId   | TSize = `'mobile'` \| `'laptop'` \| `'desktop'` | Device used              |       `'mobile'`        |
 | customize |                      `any`                      | Custom theme object      | `{customize.container}` |
 

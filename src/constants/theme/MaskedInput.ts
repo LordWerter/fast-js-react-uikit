@@ -1,35 +1,35 @@
 export const theme = {
-    cwrap: {
+    CWrap: {
         core: {},
         mobile: {},
         tablet: {},
         desktop: {},
     },
-    label: {
+    Label: {
         core: {},
         mobile: {},
         tablet: {},
         desktop: {},
     },
-    inputwrap: {
+    InputWrap: {
         core: {},
         mobile: {},
         tablet: {},
         desktop: {},
     },
-    input: {
+    Input: {
         core: {},
         mobile: {},
         tablet: {},
         desktop: {},
     },
-    placeholder: {
+    Placeholder: {
         core: {},
         mobile: {},
         tablet: {},
         desktop: {},
     },
-    notice: {
+    Notice: {
         core: {},
         mobile: {},
         tablet: {},

@@ -1,6 +1,6 @@
 import SymbCount from './SymbCount';
 
 export { SymbCount };
-export type { TProps as TSymbCountProps } from './SymbCount';
+export type { Props as SymbCountProps } from './SymbCount';
 
 export default SymbCount;

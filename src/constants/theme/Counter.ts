@@ -4,7 +4,7 @@ import {
 } from './imgs';
 
 export const theme = {
-    cwrap: {
+    CWrap: {
         core: {
             fontFamily: 'system-ui',
             fontWeight: 400,
@@ -23,7 +23,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    btn: {
+    Btn: {
         core: {
             display: 'flex',
             position: 'absolute',
@@ -59,7 +59,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    value: {
+    Value: {
         core: {
             display: 'flex',
             justifyContent: 'center',
@@ -82,7 +82,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    label: {
+    Label: {
         core: {},
         mobile: {},
         tablet: {},

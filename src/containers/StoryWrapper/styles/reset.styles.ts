@@ -21,7 +21,7 @@ const ResetStyle = css`
     article,
     aside,
     details,
-    figcaption,
+    figCaption,
     figure,
     footer,
     header,

@@ -16,7 +16,7 @@ This component creates a custom Dropbox based on got props.
 | :---------: | :---------------------------------------------: | ------------------- | :---------------------: |
 |   sizeId    | TSize = `'mobile'` \| `'laptop'` \| `'desktop'` | Device used         |       `'mobile'`        |
 |  customize  |                      `any`                      | Custom theme object | `{customize.container}` |
-| defaultItem |                      `any`                      | Default value       |      `{text, ...}`      |
+| defaultItem |                      `any`                      | Default Value       |      `{text, ...}`      |
 |    data     |                      `any`                      | Items array         |  `[{item1}, {item2},]`  |
 
 ## Usage

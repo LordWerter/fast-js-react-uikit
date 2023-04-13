@@ -17,7 +17,7 @@ This component creates a custom Modal on got props.
 |     text      |                    `string`                     | text content              |        `'some text'`        |
 |    sizeId     | TSize = `'mobile'` \| `'laptop'` \| `'desktop'` | Device used               |         `'mobile'`          |
 |   customize   |                      `any`                      | Custom theme object       |   `{customize.container}`   |
-|     data      |                      `any`                      | Object with data for link | `{link, imageId, caption,}` |
+|     data      |                      `any`                      | Object with data for link | `{link, imageId, Caption,}` |
 | handleOnClick |                      `any`                      | Callback function         |      `handleOnClick()`      |
 
 ## Usage

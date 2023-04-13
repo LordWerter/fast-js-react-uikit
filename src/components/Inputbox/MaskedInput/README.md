@@ -15,8 +15,8 @@ This component creates a custom InputWithMask on got props.
 |   Name    |                      Type                       | Description                                   |         Example         |
 | :-------: | :---------------------------------------------: | --------------------------------------------- | :---------------------: |
 |  sizeId   | TSize = `'mobile'` \| `'laptop'` \| `'desktop'` | Device used                                   |       `'mobile'`        |
-|   value   |                    `string`                     | Value of InputWithMask component              |     `'Some value'`      |
-|  params   |                      `any`                      | Object with parameters                        | `{params.placeholder}`  |
+|   Value   |                    `string`                     | Value of InputWithMask component              |     `'Some Value'`      |
+|  params   |                      `any`                      | Object with parameters                        | `{params.Placeholder}`  |
 |  onClick  |              `(event: any) => any`              | The event listener of clicking on a component |   `onClick={()=>{}}`    |
 | customize |                      `any`                      | Custom theme object                           | `{customize.container}` |
 

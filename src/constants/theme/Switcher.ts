@@ -1,5 +1,5 @@
 export const theme = {
-    cwrap: {
+    CWrap: {
         core: {
             position: 'relative',
             display: 'flex',
@@ -81,7 +81,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    leftlabel: {
+    leftLabel: {
         core: {
             display: 'flex',
             alignItems: 'center',
@@ -107,7 +107,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    rightlabel: {
+    rightLabel: {
         core: {
             display: 'flex',
             alignItems: 'center',

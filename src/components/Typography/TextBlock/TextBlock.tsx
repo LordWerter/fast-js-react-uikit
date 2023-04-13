@@ -1,24 +1,39 @@
 import React from 'react';
-import { useTheme } from '@emotion/react';
-import { TSize, TTextBlockType } from '../../../definitions/IPropTypes';
 
-export interface IProps {
-    sizeId?: TSize;
-    customize?: any;
-    type: TTextBlockType;
-}
-
-import { H1, H2, H3, H4, H5, H6, P } from './TextBlock.styles';
+import { TextBlockElems } from '../../../constants';
+import {
+    TSize,
+    TTextBlockType,
+} from '../../../definitions/proptypes';
 /**
  * imports of utils
  */
-import { mergeThemeObjects } from '../../../utils';
+import {
+    genFCElems,
+    getFCTheme,
+    mergeThemeObjects,
+} from '../../../utils';
 
-export const TextBlock: React.FC<IProps> = (props): JSX.Element => {
+export interface Props {
+    sizeId: TSize;
+    type: TTextBlockType;
+    children: React.ReactNode;
+    customize?: any;
+}
+
+export const TextBlock: React.FC<Props> = (props): JSX.Element => {
     const { sizeId = 'mobile', customize = {}, type = 'P', children } = props;
 
-    // @ts-ignore
-    const theme = { ...useTheme().components.TextBlock };
+    const {
+        H1,
+        H2,
+        H3,
+        H4,
+        H5,
+        H6,
+        P,
+    } = genFCElems(TextBlockElems);
+    const theme = getFCTheme({ FCName: 'SymbCount', nodeNames: ['CWrap', 'curnum', 'maxnum'], customize });
 
     switch (type) {
         case 'H1':

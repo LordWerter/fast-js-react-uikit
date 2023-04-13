@@ -1,5 +1,6 @@
-export type { IProps as IPriceProps } from './Price';
 import Price from './Price';
+
+export type { Props as PriceProps } from './Price';
 
 export { Price };
 

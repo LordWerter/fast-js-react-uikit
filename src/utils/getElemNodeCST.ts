@@ -1,16 +1,11 @@
-export type TCSTParts = {
-    targetToken: string;
-    actionToken?: string
-    hlaToken?: string;
-};
-
 /**
  * concatinates Key Abstraction tokens into single Compound Semantic Token 4 current DOM Node
- * @param {TCSTParts} parts
- * @returns {string}
+ * @param targetToken 
+ * @param hlaToken 
+ * @param actionToken 
+ * @returns 
  */
-export const getElemNodeCST = (parts: TCSTParts) => {
-    const { targetToken, actionToken = null, hlaToken = null } = parts;
+export const getElemNodeCST = (targetToken: string, hlaToken?: string, actionToken?: string) => {
 
     return `${hlaToken ? `${hlaToken}____` : ''}${targetToken}${actionToken ? `____${actionToken}` : ''}`;
 };

@@ -1,12 +1,21 @@
 {
   "types": [
-    "node"
+    "node",
+    "browser",
+    "react"
   ],
   "compilerOptions": {
+    "baseUrl": "./src",
     "outDir": "dist",
     "target": "es5",
-    "sourceMap": false,
+    "sourceMap": true,
+
     "declaration": true,
+    "declarationDir": "./src/definitions",
+    "declarationMap": true,
+
+    "removeComments": true,
+
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -20,21 +29,25 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "noErrorTruncation": false,
-    "lib": ["es5", "es6", "dom", "esnext"],
-    "module": "esnext",
+    "module": "ESNext",
     "allowJs": true,
-    "jsx": "react"
+    "jsx": "preserve",
+    "strict": true,
+    "typeRoots": [
+      "<rootDir>/src/definitions",
+      "<rootDir>/node_modules",
+    ]
   },
   "include": [
     "src"
   ],
   "exclude": [
-    "node_modules",
-    "dist",
-    "src/**/*.test.tsx",
-    "src/**/*.test.ts",
-    "src/**/*.spec.tsx",
-    "src/**/*.stories.tsx",
-    "src/**/*.spec.ts"
+    "<rootDir>/node_modules",
+    "<rootDir>/dist",
+    "<rootDir>/src/**/*.test.tsx",
+    "<rootDir>/src/**/*.test.ts",
+    "<rootDir>/src/**/*.spec.tsx",
+    "<rootDir>/src/**/*.stories.tsx",
+    "<rootDir>/src/**/*.spec.ts"
   ],
 }

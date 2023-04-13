@@ -1,8 +1,16 @@
 import React from 'react';
+
 import { useTheme } from '@emotion/react';
+
+import { TSize } from '../../definitions/proptypes';
 import { mergeThemeObjects } from '../../utils';
-import { CWrap, ImageWrap, ClockImg, Circle, LoadingText } from './Spinner.styles';
-import { TSize } from '../../definitions/IPropTypes';
+import {
+    Circle,
+    ClockImg,
+    CWrap,
+    ImageWrap,
+    LoadingText,
+} from './Spinner.styles';
 
 export interface IProps {
     sizeId?: TSize;

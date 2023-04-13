@@ -1,25 +1,34 @@
+import React from 'react';
+
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable guard-for-in */
 /* eslint-disable react/prop-types */
-import { TSize } from '../../definitions/IPropTypes';
-import React from 'react';
-import { useTheme } from '@emotion/react';
-import { mergeThemeObjects } from '../../utils';
-import currencies from './currencies';
-import { CWrap, IntValue, Delimiter, FractionValue, Сurrency, Line } from './Price.styles';
+import { TSize } from 'definitions/proptypes';
+import { mergeThemeObjects } from 'utils';
 
-export interface IProps {
-    value: any;
+import { useTheme } from '@emotion/react';
+
+import currencies from './currencies';
+import {
+    CWrap,
+    Delimiter,
+    FractionValue,
+    IntValue,
+    Line,
+    Сurrency,
+} from './Price.styles';
+
+export interface Props {
+    Value: any;
     config?: any;
-    sizeId?: TSize;
+    sizeId: TSize;
     customize?: any;
-    caseName?: string; // for debug only
 }
 
-export const Price: React.FC<IProps> = (props): JSX.Element => {
+export const Price: React.FC<Props> = (props): JSX.Element => {
     const {
-        value = 0,
+        Value = 0,
         config = { type: 'default', delimiter: 'none', lang: 'ru' },
         sizeId = 'mobile',
         customize = {},
@@ -44,17 +53,17 @@ export const Price: React.FC<IProps> = (props): JSX.Element => {
         theme[curKey] = mergeThemeObjects(theme[curKey], customize[curKey]);
     });
 
-    const roundToN = (value: number, n: number) => {
-        return Math.round(value * Math.pow(10, n)) / Math.pow(10, n);
+    const roundToN = (Value: number, n: number) => {
+        return Math.round(Value * Math.pow(10, n)) / Math.pow(10, n);
     };
 
-    const getFractionDigits = (value: number) => {
-        const targetArr: string[] = `${roundToN(value, 2)}`.split('.');
+    const getFractionDigits = (Value: number) => {
+        const targetArr: string[] = `${roundToN(Value, 2)}`.split('.');
         return targetArr.length === 1 ? '00' : targetArr[1].length === 1 ? `${targetArr[1]}0` : targetArr[1];
     };
 
-    const intValue = `${value}`.split('.')[0];
-    const fractionValue = getFractionDigits(value);
+    const intValue = `${Value}`.split('.')[0];
+    const fractionValue = getFractionDigits(Value);
 
     const targetDecoration = mergeThemeObjects(
         theme.lineDecorations[theme.config.decoration],
@@ -65,7 +74,7 @@ export const Price: React.FC<IProps> = (props): JSX.Element => {
         <CWrap sizeId={sizeId} theme={theme.container}>
             {config.type === 'default' ? (
                 <IntValue sizeId={sizeId} theme={theme.integer}>
-                    {value}
+                    {Value}
                 </IntValue>
             ) : (
                 <>

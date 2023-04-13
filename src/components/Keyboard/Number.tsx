@@ -1,10 +1,16 @@
 import React from 'react';
+
 import { useTheme } from '@emotion/react';
-import Image from '../Image';
-import { CWrap, Row, Key } from './Number.styles';
-import numRows from './numRows';
-import symbols from './lang/symbols';
+
 import { mergeThemeObjects } from '../../utils';
+import Image from '../Image';
+import symbols from './lang/symbols';
+import {
+    CWrap,
+    Key,
+    Row,
+} from './Number.styles';
+import numRows from './numRows';
 
 export interface IProps {
     sizeId?: any;

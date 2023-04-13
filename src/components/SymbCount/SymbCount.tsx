@@ -1,29 +1,29 @@
 import React from 'react';
 
 import { SymbCountElems } from '../../constants';
-import { TSize } from '../../definitions/IPropTypes';
+import { TSize } from '../../definitions/proptypes';
 import {
     genFCElems,
     getFCTheme,
 } from '../../utils';
 
-export type TProps = {
+export interface Props {
     sizeId: TSize;
     curNum: number;
     maxNum: number;
     customize?: any;
 }
 
-export const SymbCount: React.FC<TProps> = (props): JSX.Element => {
+export const SymbCount: React.FC<Props> = (props): JSX.Element => {
     const { sizeId = 'mobile', customize = {}, curNum, maxNum } = props;
 
     const { CWrap, CurNum, MaxNum } = genFCElems(SymbCountElems);
-    const theme = getFCTheme({ FCName: 'SymbCount', nodeNames: ['cwrap', 'curnum', 'maxnum'], customize });
+    const theme = getFCTheme({ FCName: 'SymbCount', nodeNames: ['CWrap', 'curnum', 'maxnum'], customize });
 
     const persent = Math.ceil((curNum / maxNum) * 100);
 
     return (
-        <CWrap sizeId={sizeId} theme={theme.cwrap}>
+        <CWrap sizeId={sizeId} theme={theme.CWrap}>
             <CurNum
                 sizeId={sizeId}
                 theme={theme.curnum}

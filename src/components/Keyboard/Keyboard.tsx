@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+
 import { useTheme } from '@emotion/react';
-import KeyBtn from './KeyBtn';
+
 import { mergeThemeObjects } from '../../utils';
-import { default as keysTable } from './lang';
+import {
+    Board,
+    CWrap,
+    Row,
+} from './Keyboard.styles';
+import KeyBtn from './KeyBtn';
+import keysTable from './lang';
 import langRows from './langRows';
-import { CWrap, Board, Row } from './Keyboard.styles';
 
 export interface IProps {
     lang: string;
@@ -20,7 +26,7 @@ export const Keyboard: React.FC<IProps> = (props): JSX.Element => {
 
     // @ts-ignore
     const theme = { ...useTheme().components.SymbolsKeyboard };
-    const keyBtnStyles = mergeThemeObjects(theme.keybtn, customize.keybtn);
+    const keyBtnStyles = mergeThemeObjects(theme.keyBtn, customize.keyBtn);
 
     const renderRow = (code: string, boardId: string) => {
         switch (code) {

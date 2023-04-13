@@ -2,14 +2,14 @@ import { useTheme } from '@emotion/react';
 
 import { mergeThemeObjects } from './mergeThemeObjects';
 
-export type TFCThemeParams = {
+export type FCThemeParams = {
     FCName: string;
     typeToken?: string | null;
     nodeNames: string[];
-    customize?: any;
+    customize?: FCThemeCustoms;
 };
 
-export const getFCTheme = (params: TFCThemeParams) => {
+export const getFCTheme = (params:FCThemeParams): FCTheme => {
     const { FCName, typeToken = null, nodeNames, customize = {} } = params;
 
     const fullTheme = useTheme();

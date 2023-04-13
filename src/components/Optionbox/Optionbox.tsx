@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 
-import { Optionbox as nodeList } from 'constants';
-import { TSize } from 'definitions';
+import { TSize } from 'definitions/proptypes';
 
+import { OptionboxElems } from '../../constants';
 import {
     genFCElems,
     getFCTheme,
 } from '../../utils';
 
-export type ValueType = string | number;
-
-export type TProps = {
+export interface Props {
     id: string;
-    idPrefix?: string;
-    idPostfix?: string;
+    hlaToken?: string;
+    actionToken?: string;
     sizeId?: TSize;
     customize?: any;
     typeToken?: string | null;
@@ -36,7 +34,7 @@ export type TProps = {
     /** Whether or not checkbox is checked. */
     checked?: boolean;
 
-    /** The initial value of checked. */
+    /** The initial Value of checked. */
     defaultChecked?: boolean;
 
     /** Whether or not checkbox is indeterminate. */
@@ -48,8 +46,8 @@ export type TProps = {
     /** Pass a ref to the input element. */
     inputRef?: React.Ref<any>;
 
-    /** The HTML input value. */
-    value: boolean;
+    /** The HTML input Value. */
+    Value: boolean;
 
     /** A checkbox can receive focus. */
     tabIndex?: number;
@@ -62,14 +60,14 @@ export type TProps = {
 
     /** Called when the user attempts to change the checked state. */
     handleOnChange?: (
-        // value: V | undefined,
+        // Value: V | undefined,
         // checked: boolean,
         event: Event
     ) => void;
 
-    /** Called when the checkbox or label is clicked. */
+    /** Called when the checkbox or Label is clicked. */
     handleOnClick?: (evt?: Event) => unknown;
-};
+}
 
 /**
  * renders CheckboxButton Item
@@ -77,31 +75,31 @@ export type TProps = {
  * @type {Function}
  * @returns {JSX.Element}
  */
-export const Optionbox: React.FC<TProps> = (props): JSX.Element => {
-    const { id, text, value, handleOnClick, handleOnChange, sizeId = 'mobile', customize = {}, typeToken = null } = props;
-    const [isActive, setIsActive] = useState(value);
+export const Optionbox: React.FC<Props> = (props): JSX.Element => {
+    const { id, text, Value, handleOnClick, handleOnChange, sizeId = 'mobile', customize = {}, typeToken = null } = props;
+    const [isActive, setIsActive] = useState(Value);
 
-    const { CWrap, RadioBtn, RadioIcon, Label } = genFCElems(nodeList);
+    const { CWrap, RadioBtn, RadioIcon, Label } = genFCElems(OptionboxElems);
     const theme = getFCTheme({
         FCName: 'Optionbox', typeToken,
-        nodeNames: ['cwrap', 'radiobtn', 'radioicon', 'label'], customize
+        nodeNames: ['CWrap', 'radioBtn', 'radioicon', 'Label'], customize
     });
 
     return (
-        <CWrap sizeId={sizeId} theme={theme.cwrap} onClick={(evt: Event) => {
+        <CWrap sizeId={sizeId} theme={theme.CWrap} onClick={(evt: Event) => {
             setIsActive(!isActive);
             handleOnClick && handleOnClick(evt);
         }}>
             <RadioBtn
                 id={id} type={'radio'} checked={isActive} hidden 
-                sizeId={sizeId} theme={theme.radiobtn}
+                sizeId={sizeId} theme={theme.radioBtn}
                 onChange={(evt: Event) => {
                     handleOnChange && handleOnChange(evt);
                 }}
             />
             <RadioIcon className={isActive ? 'isActive' : ''} sizeId={sizeId} theme={theme.radioicon} />
-            {text && (<Label for={id} sizeId={sizeId} theme={theme.label}>{text}</Label>)}
-            <input type={'radio'} checked={value} hidden={true} />
+            {text && (<Label for={id} sizeId={sizeId} theme={theme.Label}>{text}</Label>)}
+            <input type={'radio'} checked={Value} hidden={true} />
         </CWrap>
     );
 };

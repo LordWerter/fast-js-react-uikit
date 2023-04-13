@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { ICWrapProps } from '../../definitions/IPropTypes';
+
+import { ICWrapProps } from '../../definitions/proptypes';
 import { getResultStyles } from '../../utils';
 
 export interface IWrapperProps extends ICWrapProps {

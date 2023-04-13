@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { useTheme } from '@emotion/react';
-import Image from '../Image';
+
+import { TSize } from '../../definitions/proptypes';
 import { mergeThemeObjects } from '../../utils';
+import Image from '../Image';
 import { CWrap } from './KeyBtn.styles';
-import { TSize } from '../../definitions/IPropTypes';
 
 export interface IProps {
     boardId: string;

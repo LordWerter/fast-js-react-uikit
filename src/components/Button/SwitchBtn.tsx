@@ -1,22 +1,21 @@
 import React from 'react';
 
-import { useTheme } from '@emotion/react';
-
-import { TSize } from '../../definitions/IPropTypes';
-/**
- * imports of utils
- */
+import { SwitchBtnElems } from '../../constants';
+import { TSize } from '../../definitions/proptypes';
 import {
-    genComponentElement,
-    mergeThemeObjects,
+    genFCElems,
+    getElemNodeCST,
+    getFCTheme,
 } from '../../utils';
 
-export type TProps = {
-    text: string;
+export interface Props {
+    caption?: string;
     sizeId?: TSize;
     customize?: any;
+    handleOnClick: React.MouseEventHandler<HTMLButtonElement>;
     typeToken?: string | null;
-    onClick?: MouseEvent;
+    hlaToken?: string;
+    actionToken?: string;
 }
 
 /**
@@ -25,28 +24,25 @@ export type TProps = {
  * @type {Function}
  * @returns {JSX.Element}
  */
-export const SwitchBtn: React.FC<TProps> = (props): JSX.Element => {
-    const { text, onClick, sizeId = 'mobile', customize = {}, typeToken = null } = props;
+export const SwitchBtn: React.FC<Props> = (props): JSX.Element => {
+    const { caption, sizeId = 'mobile', customize = {}, handleOnClick, typeToken = null, hlaToken, actionToken } = props;
 
-    const CWrap = genComponentElement('button');
-    const Caption = genComponentElement('span');
-
-    // @ts-ignore
-    const componentStylesObj = { ...useTheme().components.Button };
-    const targetTheme = typeToken ? { ...componentStylesObj[typeToken] } : { ...componentStylesObj };
-    const requiredNodeNames = ['cwrap', 'caption', 'icon', 'image'];
-    const theme: any = {};
-
-    requiredNodeNames.forEach((curKey: string) => {
-        theme[curKey] = mergeThemeObjects(targetTheme[curKey], customize[curKey]);
+    const { CWrap, Caption } = genFCElems(SwitchBtnElems);
+    const theme = getFCTheme({
+        FCName: 'SwitchBtn', typeToken, 
+        nodeNames: ['CWrap', 'Caption'], customize
     });
 
-    // TODO: add hover effect
+    const testIds = {
+        CWrap: getElemNodeCST(`SWITCH_BTN__CWRAP`, hlaToken, actionToken),
+        Caption: getElemNodeCST(`SWITCH_BTN__CAPTION`, hlaToken, actionToken),
+    };
+
     return (
-        <CWrap sizeId={sizeId} theme={theme.container} onClick={onClick}>
-            {text && (
-                <Caption sizeId={sizeId} theme={theme.caption}>
-                    {text}
+        <CWrap sizeId={sizeId} theme={theme.CWrap} data-testid={testIds.CWrap} onClick={handleOnClick}>
+            {!!caption && (
+                <Caption sizeId={sizeId} theme={theme.Caption} data-testid={testIds.Caption}>
+                    {caption}
                 </Caption>
             )}
         </CWrap>

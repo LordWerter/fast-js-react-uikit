@@ -1,6 +1,6 @@
 import Optionbox from './Optionbox';
 
 export { Optionbox };
-export type { TProps as IOptionboxProps } from './Optionbox';
+export type { Props as OptionboxProps } from './Optionbox';
 
 export default Optionbox;

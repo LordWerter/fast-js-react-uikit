@@ -1,15 +1,20 @@
 import React, { CSSProperties } from 'react';
+
 import { useTheme } from '@emotion/react';
-import CheckBox from '../../components/Checkbox';
+
+import { Checkbox } from '../../components';
+import { TSize } from '../../definitions/proptypes';
 import { mergeThemeObjects } from '../../utils';
 import { CWrap } from './CheckBoxBar.styles';
 
-export interface ICheckBox {
-    name: string;
-    styles?: CSSProperties;
-    handleOnChange?: any;
+export interface CheckBox {
+    key: string;
+    hash: string;
+    label?: string;
+    customize?: CSSProperties;
+    handleOnChange?: React.MouseEventHandler;
+    isChecked?: boolean;
 }
-import { TSize } from '../../definitions/IPropTypes';
 
 export interface IProps {
     sizeId?: TSize;
@@ -26,18 +31,18 @@ const CheckBoxBar: React.FC<IProps> = (props): JSX.Element => {
     return (
         <CWrap sizeId={sizeId} theme={mergeThemeObjects(theme.container, customize.container)}>
             {data &&
-                data.map((item: any, index: number): JSX.Element => {
-                    const { hash, label, handleOnChange } = item;
+                data.map((item: any): JSX.Element => {
+                    const { key, hash, label, handleOnChange, notice, isChecked } = item;
                     return (
-                        <CheckBox
-                            key={index}
-                            hash={hash}
+                        <Checkbox
+                            key={key}
                             sizeId={sizeId}
+                            hash={hash}
                             label={label}
-                            customize={theme.checkbox}
-                            onChange={() => {
-                                handleOnChange();
-                            }}
+                            customize={theme.Checkbox}
+                            handleOnChange={handleOnChange}
+                            notice={notice}
+                            isChecked={isChecked}
                         />
                     );
                 })}

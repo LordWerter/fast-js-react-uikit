@@ -7,28 +7,30 @@ import {
 
 import { mockedTheme } from '../../constants';
 import StoryWrapper from '../../containers/StoryWrapper';
-import BasicButton from './BasicButton';
+import BasicBtn from './BasicBtn';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Basic Button',
-  component: BasicButton,
-} as ComponentMeta<typeof BasicButton>;
+  component: BasicBtn,
+} as ComponentMeta<typeof BasicBtn>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof BasicButton> = (args) => (
+const Template: ComponentStory<typeof BasicBtn> = (args) => (
     <StoryWrapper theme={mockedTheme} initialEntries={['/']}>
-        <BasicButton {...args} />
+        <BasicBtn {...args} />
     </StoryWrapper>
 );
 
 export const Basic = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Basic.args = {
-    text: 'Help me',
+    caption: 'Help me',
     sizeId: 'mobile',
     customize: {},
-    onClick: () => {
+    handleOnClick: () => {
         console.warn('Basic Button onClick is OK!');
-    }
+    },
+    typeToken: null,
+    hlaToken: 'STORYBOOK',
 };

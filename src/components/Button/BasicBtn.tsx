@@ -4,42 +4,49 @@ import React from 'react';
  * imports of utils
  */
 import { BasicButtonElems } from '../../constants';
-import { TSize } from '../../definitions/IPropTypes';
+import { TSize } from '../../definitions/proptypes';
 import {
     genFCElems,
+    getElemNodeCST,
     getFCTheme,
 } from '../../utils';
 
-export type TProps = {
-    text: string;
+export interface Props {
+    caption?: string;
     sizeId?: TSize;
     customize?: any;
+    handleOnClick?: React.MouseEventHandler<HTMLButtonElement>;
     typeToken?: string | null;
-    onClick?: (evt: Event) => unknown;
+    hlaToken?: string;
+    actionToken?: string;
 }
 
 /**
- * renders BasicButton Item
- * @param {Object} props implements IProps
+ * renders BasicBtn
+ * @param {Object} props implements Props
  * @type {Function}
  * @returns {JSX.Element}
  */
-export const BasicButton: React.FC<TProps> = (props): JSX.Element => {
-    const { text, onClick, sizeId = 'mobile', customize = {}, typeToken = null } = props;
+export const BasicBtn: React.FC<Props> = (props): JSX.Element => {
+    const { caption, sizeId = 'mobile', customize = {}, handleOnClick, typeToken = null, hlaToken, actionToken } = props;
 
     const { CWrap, Caption } = genFCElems(BasicButtonElems);
-    const theme = getFCTheme({ FCName: 'Button', typeToken, nodeNames: ['cwrap', 'caption'], customize });
+    const theme = getFCTheme({ FCName: 'Button', typeToken, nodeNames: ['CWrap', 'Caption'], customize });
 
-    // TODO: add hover effect
+    const testIds = {
+        CWrap: getElemNodeCST(`BASIC_BTN__CWRAP`, hlaToken, actionToken),
+        Caption: getElemNodeCST(`BASIC_BTN__CAPTION`, hlaToken, actionToken),
+    };
+
     return (
-        <CWrap sizeId={sizeId} theme={theme.cwrap} onClick={onClick}>
-            {text && (
-                <Caption sizeId={sizeId} theme={theme.caption}>
-                    {text}
+        <CWrap sizeId={sizeId} theme={theme.CWrap} data-testid={testIds.CWrap} onClick={handleOnClick}>
+            {!!caption && (
+                <Caption sizeId={sizeId} theme={theme.Caption} data-testid={testIds.Caption}>
+                    {caption}
                 </Caption>
             )}
         </CWrap>
     );
 };
 
-export default BasicButton;
+export default BasicBtn;

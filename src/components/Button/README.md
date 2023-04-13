@@ -14,7 +14,7 @@ This component creates a button based on got props.
 
 |   Name    |                      Type                       | Description                                       |      Example       |
 | :-------: | :---------------------------------------------: | ------------------------------------------------- | :----------------: |
-|   text    |                    `string`                     | A caption of a button                             |   `'Subscribe'`    |
+|   text    |                    `string`                     | A Caption of a button                             |   `'Subscribe'`    |
 |  sizeId   | TSize = `'mobile'` \| `'laptop'` \| `'desktop'` | Device used                                       |    `'desktop'`     |
 | customize |                      `any`                      | Custom theme object                               |  `{theme.image}`   |
 |  iconId   |                    `string`                     | Id of an button icon                              |     `'Icon1'`      |

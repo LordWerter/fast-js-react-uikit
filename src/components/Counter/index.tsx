@@ -1,6 +1,6 @@
 import Counter from './Counter';
 
 export { Counter };
-export type { TProps as TCounterProps } from './Counter';
+export type { Props as CounterProps } from './Counter';
 
 export default Counter;

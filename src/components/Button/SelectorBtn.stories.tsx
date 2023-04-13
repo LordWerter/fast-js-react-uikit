@@ -29,15 +29,15 @@ SelectorBtnInst.args = {
     initCaption: 'Choose action...',
     options: [
         {
-            caption: 'Send Request',
+            Caption: 'Send Request',
             onClick: () => console.log('Send Request Action was clicked'),
         },
         {
-            caption: 'Fetch Data',
+            Caption: 'Fetch Data',
             onClick: () => console.log('Fetch Data Action was clicked'),
         },
         {
-            caption: 'Logout',
+            Caption: 'Logout',
             onClick: () => console.log('Logout Action was clicked'),
         },
     ],

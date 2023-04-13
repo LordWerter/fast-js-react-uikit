@@ -1,33 +1,40 @@
 import React, {
-    ChangeEvent,
     useEffect,
     useRef,
     useState,
 } from 'react';
 
+import { TSize } from 'definitions/proptypes';
 import IMask from 'imask';
-
-import { MaskedInputElems } from '../../../constants';
-import { TSize } from '../../../definitions/IPropTypes';
 import {
     genFCElems,
     getFCTheme,
-} from '../../../utils';
+} from 'utils';
 
-export type TProps = {
+import { MaskedInputElems } from '../../../constants';
+
+export interface Props {
     sizeId: TSize;
     value: string;
     label?: string;
+    notice?: string;
     placeholder: string;
-    maskConfig: any;
+    maskConfig: IMask.AnyMaskedOptions;
     customize?: any;
     disabled?: boolean;
-    onChange: (event: ChangeEvent<HTMLInputElement>) => unknown;
+    handleOnChange?: (event: React.ChangeEvent<HTMLInputElement>) => unknown;
+    handleReset?: () => unknown;
+    typeToken?: string | null;
+    hlaToken?: string;
+    actionToken?: string;
 }
 
-export const MaskedInput: React.FC<TProps> = (props): JSX.Element => {
-    const { sizeId = 'mobile', value = '', label, placeholder, disabled, maskConfig, customize, onChange } = props;
+export const MaskedInput: React.FC<Props> = (props): JSX.Element => {
+    const { sizeId = 'mobile', value, label, notice, placeholder, disabled, maskConfig, customize, handleOnChange, handleReset, typeToken = null, hlaToken, actionToken } = props;
     const [isActive, setIsActive] = useState(false);
+
+    const [curValue, setCurValue] = useState(value);
+
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -37,47 +44,62 @@ export const MaskedInput: React.FC<TProps> = (props): JSX.Element => {
     }, []);
 
 
-    const { CWrap, Label, InputWrap, InputBox, Placeholder, Notice } = genFCElems(MaskedInputElems);
+    const { CWrap, Label, ControlWrap, InputBox, Placeholder, ResetBtn, Notice } = genFCElems(MaskedInputElems);
     const theme = getFCTheme({
-        FCName: 'MaskedInput', nodeNames: ['cwrap', 'label', 'inputwrap', 'inputbox', 'placeholder', 'notice'], customize
+        FCName: 'Checkbox', typeToken,
+        nodeNames: ['CWrap', 'Label', 'ControlWrap', 'InputBox', 'Placeholder', 'ResetBtn', 'Notice'], customize
     });
 
-    return (
-        <CWrap sizeId={sizeId} theme={theme.cwrap}>
-            {label && (
-                <Label sizeId={sizeId} theme={theme.label}>
-                    {label}
-                </Label>
-            )}
-            <InputWrap sizeId={sizeId} theme={theme.inputwrap} className={isActive ? 'isActive' : ''}>
-                <InputBox
-                    ref={inputRef}
+return (
+    <CWrap sizeId={sizeId} theme={theme.CWrap}>
+        {label ? (
+            <Label sizeId={sizeId} theme={theme.Label}>
+                {label}
+            </Label>
+        ) : (
+            <></>
+        )}
+        <ControlWrap sizeId={sizeId} theme={theme.InputWrap} className={isActive ? 'isActive' : ''}>
+            <InputBox
+                ref={inputRef}
+                sizeId={sizeId}
+                theme={theme.InputBox}
+                className={isActive ? 'isActive' : ''}
+                Value={curValue}
+                disabled={disabled}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    if (handleOnChange) handleOnChange(event);
+                    setCurValue(event.target.value);
+                }}
+                onFocus={() => {
+                    setIsActive(true);
+                }}
+                onBlur={() => {
+                    setIsActive(false);
+                }}
+            />
+            {!!value ? (
+                <ResetBtn
                     sizeId={sizeId}
-                    theme={theme.input}
-                    className={isActive ? 'isActive' : ''}
-                    value={value}
-                    disabled={disabled}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                        if (onChange) onChange(event);
-                    }}
-                    onFocus={() => {
-                        setIsActive(true);
-                    }}
-                    onBlur={() => {
-                        setIsActive(false);
+                    theme={theme.InputBox}
+                    onClick={() => {
+                        handleReset && handleReset();
+                        setCurValue('');
                     }}
                 />
-                {!value && (
-                    <Placeholder sizeId={sizeId} theme={theme.placeholder}>
+            ) : (
+                !!placeholder && (
+                    <Placeholder sizeId={sizeId} theme={theme.Placeholder}>
                         {placeholder}
                     </Placeholder>
-                )}
-            </InputWrap>
-            <Notice sizeId={sizeId} theme={theme.notice}>
-                {}
-            </Notice>
-        </CWrap>
-    );
+                )
+            )}
+        </ControlWrap>
+        <Notice sizeId={sizeId} theme={theme.Notice}>
+            {notice || ''}
+        </Notice>
+    </CWrap>
+);
 };
 
 export default MaskedInput;

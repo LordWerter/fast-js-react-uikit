@@ -1,7 +1,7 @@
 import { CHECKBOX_MAP } from './imgs';
 
 export const theme = {
-    cwrap: {
+    CWrap: {
         core: {
             display: 'flex',
         },
@@ -9,13 +9,13 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    checkbtn: {
+    CheckBtn: {
         core: {},
         mobile: {},
         tablet: {},
         desktop: {},
     },
-    checkicon: {
+    CheckIcon: {
         core: {
             width: '16px',
             height: '16px',
@@ -37,7 +37,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    label: {
+    Label: {
         core: {},
         mobile: {},
         tablet: {},

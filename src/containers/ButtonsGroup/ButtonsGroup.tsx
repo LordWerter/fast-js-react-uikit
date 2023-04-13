@@ -1,51 +1,49 @@
 import React, { CSSProperties } from 'react';
-import { useTheme } from '@emotion/react';
-import Button from '../../components/Button';
-import { mergeThemeObjects } from '../../utils';
-import { CWrap } from './ButtonsGroup.styles';
 
-export interface IAdminJob {
+import { BasicBtn } from 'components';
+
+import { ButtonsGroupElems } from '../../constants';
+import { TSize } from '../../definitions/proptypes';
+import {
+    genFCElems,
+    getFCTheme,
+} from '../../utils';
+
+export interface BtnDescriptor {
     name?: string;
     type?: string;
     force?: string;
-    iconId?: string;
     styles?: CSSProperties;
     onClick?: () => any;
 }
-import { TSize } from '../../definitions/IPropTypes';
 
-export interface IProps {
+export interface Props {
     sizeId?: TSize;
     customize?: any;
-    data: IAdminJob[];
+    data: BtnDescriptor[];
+    typeToken?: string;
 }
 
-const ButtonsGroup: React.FC<IProps> = (props): JSX.Element => {
-    const { sizeId = 'mobile', customize = {}, data } = props;
-    // @ts-ignore
-    const theme = { ...useTheme().containers.ButtonsGroup };
-    const requiredThemeKeys = ['container', 'button'];
+const ButtonsGroup: React.FC<Props> = (props): JSX.Element => {
+    const { sizeId = 'mobile', customize = {}, data, typeToken = '' } = props;
+    const { CWrap } = genFCElems(ButtonsGroupElems);
+    const theme = getFCTheme({ FCName: 'ButtonsGroup', typeToken, nodeNames: ['CWrap'], customize });
 
-    requiredThemeKeys.forEach((key: string) => {
-        theme[key] = mergeThemeObjects(theme[key], customize[key]);
-    });
 
     return (
         <CWrap sizeId={sizeId} theme={theme.container}>
             {data &&
                 data.map((item: any, index: number): JSX.Element => {
-                    const { name, iconId = null, onClick } = item;
+                    const { name, onClick } = item;
 
                     return (
-                        <Button
+                        <BasicBtn
                             key={index}
                             customize={theme.button}
-                            iconId={iconId}
                             text={name}
                             sizeId={sizeId}
-                            onClick={onClick}>
-                            {name}
-                        </Button>
+                            onClick={onClick}
+                        />
                     );
                 })}
         </CWrap>

@@ -25,7 +25,7 @@ const Template: ComponentStory<typeof Optionbox> = (args) => (
 export const Basic = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Basic.args = {
-    id: 'OPTION_BTN',
+    id: 'OPTION_Btn',
     text: 'Help me',
     sizeId: 'mobile',
     customize: {},

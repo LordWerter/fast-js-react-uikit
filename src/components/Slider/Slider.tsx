@@ -1,12 +1,12 @@
 import React from 'react';
 
+import { CWrap } from './Slider.styles';
+
 export interface IProps {
     config?: any;
     data: any;
     lang?: any;
 }
-
-import { CWrap } from './Slider.styles';
 
 export const Slider: React.FC<IProps> = (props): JSX.Element => {
     const { data = null, config = null, lang = 'ru' } = props;

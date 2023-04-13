@@ -1,29 +1,28 @@
-import React, {
-    useMemo,
-    useState,
-} from 'react';
+import React, { useState } from 'react';
 
 import { SelectorBtnElems } from '../../constants';
-import { TSize } from '../../definitions/IPropTypes';
+import { TSize } from '../../definitions/proptypes';
 import {
     genFCElems,
+    getElemNodeCST,
     getFCTheme,
 } from '../../utils';
-import BasicButton from './BasicBtn';
+import { BasicBtn } from './';
 
-export type TOption = {
+export type TOption<T> = {
+    key: string;
     caption: string;
-    onClick: (evt: Event) => unknown;
+    handleOnClick: React.MouseEventHandler<T>;
 };
 
-export type TProps = {
+export interface Props {
     sizeId: TSize;
-    initCaption: string;
-    options: TOption[];
+    caption: string;
+    options: TOption<HTMLButtonElement>[];
     customize?: any;
     typeToken?: string | null;
-    idPrefix?: string;
-    idPostfix?: string;
+    hlaToken?: string;
+    actionToken?: string;
 };
 
 /**
@@ -32,36 +31,47 @@ export type TProps = {
  * @type {Function}
  * @returns {JSX.Element}
  */
-export const SelectorBtn: React.FC<TProps> = (props): JSX.Element => {
-    const { initCaption, options, sizeId = 'mobile', customize = {}, typeToken = null } = props;
+export const SelectorBtn: React.FC<Props> = (props): JSX.Element => {
+    const { caption, options, sizeId = 'mobile', customize = {}, typeToken = null, hlaToken, actionToken } = props;
     const [showOptions, setShowOptions] = useState(false);
 
-    const { CWrap, CurOption, ToggleBtn, OptionsWrap } = useMemo(() => genFCElems(SelectorBtnElems), []);
+    const { CWrap, CurOptionWrap, CurOption, ToggleBtn, OptionsWrap } = genFCElems(SelectorBtnElems);
     const theme = getFCTheme({
             FCName: 'SelectorBtn', typeToken, 
-            nodeNames: ['cwrap', 'curoption', 'togglebtn', 'optionswrap', 'optionbtn'], customize
+            nodeNames: ['CWrap', 'CurOption', 'ToggleBtn', 'OptionsWrap'], customize
         });
 
+    const testIds = {
+        CWrap: getElemNodeCST(`SELECTOR_BTN__CWRAP`, hlaToken, actionToken),
+        CurOptionWrap: getElemNodeCST(`SELECTOR_BTN__CUR_OPTION_WRAP`, hlaToken, actionToken),
+        CurOption: getElemNodeCST(`SELECTOR_BTN__CUR_OPTION`, hlaToken, actionToken),
+        ToggleBtn: getElemNodeCST(`SELECTOR_BTN__TOGGLE_BTN`, hlaToken, actionToken),
+        OptionsWrap: getElemNodeCST(`SELECTOR_BTN__OPTIONS_WRAP`, hlaToken, actionToken),
+    };
+    
+    
     return (
-        <CWrap sizeId={sizeId} theme={theme.cwrap} onClick={() => {
-            return null;
+        <CWrap sizeId={sizeId} theme={theme.CWrap} onClick={() => {
+            setShowOptions(!showOptions);
         }}>
-            <CurOption sizeId={sizeId} theme={theme.curoption}>
-                {initCaption}
-            </CurOption>
-            <ToggleBtn theme={theme.togglebtn} onClick={() => {
-                setShowOptions(!showOptions);
-            }} />
-            <OptionsWrap className={showOptions ? 'isVisible' : ''} sizeId={sizeId} theme={theme.optionswrap}>
-                {options.map((option: TOption, index: number) => {
-                    const { caption, onClick } = option;
+            <CurOptionWrap sizeId={sizeId} theme={theme.CurOptionWrap} data-testid={testIds.CurOptionWrap}>
+                <CurOption sizeId={sizeId} theme={theme.CurOption} data-testid={testIds.CurOption}>
+                    {caption}
+                </CurOption>
+                <ToggleBtn sizeId={sizeId}  theme={theme.ToggleBtn} data-testid={testIds.ToggleBtn} />
+            </CurOptionWrap>
+            <OptionsWrap className={showOptions ? 'isVisible' : ''} sizeId={sizeId} theme={theme.OptionsWrap} data-testid={testIds.OptionsWrap}>
+                {options.map((option: TOption<HTMLButtonElement>) => {
+                    const { key, caption, handleOnClick } = option;
                     return (
-                        <BasicButton
-                            key={index}
-                            sizeId={sizeId} customize={theme.optionbtn} onClick={(evt: Event) => {
+                        <BasicBtn
+                            key={key}
+                            sizeId={sizeId} customize={theme.OptionBtn} handleOnClick={(evt: React.MouseEvent<HTMLButtonElement>) => {
                                 setShowOptions(false);
-                                onClick(evt);
-                            }} text={caption}
+                                handleOnClick && handleOnClick(evt);
+                            }} caption={caption}
+                            hlaToken={hlaToken ? `${hlaToken}__SELECTOR_BTN` : 'SELECTOR_BTN'}
+                            actionToken={actionToken}
                         />
                     );
             })}

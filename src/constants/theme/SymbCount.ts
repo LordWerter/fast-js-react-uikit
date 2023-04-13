@@ -1,5 +1,5 @@
 export const theme = {
-    cwrap: {
+    CWrap: {
         core: {
             display: 'flex',
             justifyContent: 'center',

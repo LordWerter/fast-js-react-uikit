@@ -1,6 +1,5 @@
 import Dropbox from './Dropbox';
 
 export { Dropbox };
-export type { TProps as TDropboxProps } from './Dropbox';
-
+export type { Props as DropboxProps } from './Dropbox';
 export default Dropbox;

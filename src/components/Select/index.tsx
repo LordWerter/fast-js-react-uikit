@@ -1,5 +1,6 @@
-export type { IProps as ISelectProps } from './Select';
 import Select from './Select';
+
+export type { IProps as TSelectProps } from './Select';
 
 export { Select };
 

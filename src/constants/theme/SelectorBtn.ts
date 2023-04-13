@@ -1,5 +1,5 @@
 export const theme = {
-    cwrap: {
+    CWrap: {
         core: {
             display: 'flex',
             flexDirection: 'column',
@@ -12,7 +12,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    curoption: {
+    CurOption: {
         core: {
             padding: '0 24px 0 18px',
             textAlign: 'left',
@@ -22,7 +22,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    togglebtn: {
+    ToggleBtn: {
         core: {
             position: 'absolute',
             top: 0,
@@ -35,7 +35,7 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    optionswrap: {
+    OptionsWrap: {
         core: {
             display: 'none',
             flexDirection: 'column',
@@ -52,8 +52,8 @@ export const theme = {
         tablet: {},
         desktop: {},
     },
-    optionbtn: {
-        cwrap: {
+    OptionBtn: {
+        CWrap: {
             core: {
                 width: '100%',
                 fontFamily: 'system-ui',

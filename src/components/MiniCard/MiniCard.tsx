@@ -5,10 +5,7 @@ import { mergeThemeObjects } from 'utils';
 
 import { useTheme } from '@emotion/react';
 
-import {
-    CWrap,
-    nodeDict,
-} from './MiniCard.styles';
+import { CWrap, nodeDict } from './MiniCard.styles';
 
 export type TNode = {
     name: string;
@@ -18,9 +15,7 @@ export type TNode = {
     handleOnClick?: React.MouseEventHandler<HTMLElement>;
 };
 
-export type TFCTheme = {
-
-};
+export type TFCTheme = {};
 
 export interface Props {
     sizeId: SizeId;
@@ -28,7 +23,6 @@ export interface Props {
     customize?: any;
     handleOnClick?: any;
 }
-
 
 export const MiniCard: React.FC<Props> = (props): JSX.Element => {
     const {
@@ -43,7 +37,10 @@ export const MiniCard: React.FC<Props> = (props): JSX.Element => {
     // const requiredThemeKeys = ['container', 'image', 'title', 'images']; // it's for checking required theme keys
 
     Object.keys(theme).forEach((elementName: string) => {
-        theme[elementName] = mergeThemeObjects(theme[elementName], customize[elementName]);
+        theme[elementName] = mergeThemeObjects(
+            theme[elementName],
+            customize[elementName]
+        );
     });
 
     return (
@@ -54,22 +51,39 @@ export const MiniCard: React.FC<Props> = (props): JSX.Element => {
             onClick={() => {
                 handleOnClick && handleOnClick();
             }}>
-            {!!data.length && data.map((targetNode: TNode) => {
-                const {name, text, src = '', href, handleOnClick } = targetNode;
-                const CurNode = nodeDict[name];
-                let nodeProps: any = {
-                    sizeId,
-                    theme: theme[name.toLowerCase()],
-                };
-                if (name === 'Image') nodeProps = { ...nodeProps, style: {
-                    backgroundImage: `url('${src}')`,
-                } };
-                return (<CurNode {...nodeProps} onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-                    !!handleOnClick && handleOnClick(event);
-                }}>
-                    {!!text && text}
-                </CurNode>);
-            })}
+            {!!data.length &&
+                data.map((targetNode: TNode) => {
+                    const {
+                        name,
+                        text,
+                        src = '',
+                        href,
+                        handleOnClick,
+                    } = targetNode;
+                    const CurNode = nodeDict[name];
+                    let nodeProps: any = {
+                        sizeId,
+                        theme: theme[name.toLowerCase()],
+                    };
+                    if (name === 'Image')
+                        nodeProps = {
+                            ...nodeProps,
+                            style: {
+                                backgroundImage: `url('${src}')`,
+                            },
+                        };
+                    return (
+                        <CurNode
+                            {...nodeProps}
+                            onClick={(
+                                event: React.MouseEvent<HTMLElement, MouseEvent>
+                            ) => {
+                                !!handleOnClick && handleOnClick(event);
+                            }}>
+                            {!!text && text}
+                        </CurNode>
+                    );
+                })}
         </CWrap>
     );
 };

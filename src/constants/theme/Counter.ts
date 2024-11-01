@@ -1,7 +1,4 @@
-import {
-    ICON__MINUS,
-    ICON__PLUS,
-} from './imgs';
+import { ICON__MINUS, ICON__PLUS } from './imgs';
 
 export const theme = {
     CWrap: {
@@ -17,7 +14,8 @@ export const theme = {
             border: '0px',
             borderRadius: '4px',
             overflow: 'hidden',
-            boxShadow: '0 0px 4px inset rgba(255, 255, 255, 0.2), 0 2px 4px rgba(0, 0, 0, 0.4)',
+            boxShadow:
+                '0 0px 4px inset rgba(255, 255, 255, 0.2), 0 2px 4px rgba(0, 0, 0, 0.4)',
         },
         mobile: {},
         tablet: {},
@@ -38,7 +36,6 @@ export const theme = {
             backgroundRepeat: 'no-repeat',
             backgroundColor: '#000',
 
-
             boxShadow: '0 0px 3px rgb(0 0 0 / 80%)',
             border: 'none',
 
@@ -53,7 +50,7 @@ export const theme = {
             '&.isDisabled': {
                 backgroundColor: '#CCC',
                 boxShadow: '0 0px 2px inset rgba(0, 0, 0, 0.2)',
-            }
+            },
         },
         mobile: {},
         tablet: {},
@@ -75,8 +72,6 @@ export const theme = {
             boxSizing: 'border-box',
             padding: '0 28px',
             overflow: 'hidden',
-
-
         },
         mobile: {},
         tablet: {},

@@ -1,10 +1,5 @@
 import { genComponentElement } from './';
 
-export type TElement = {
-    name: string;
-    tag: string;
-};
-
 /**
  * renders BasicButton Item
  * @param {TElement[]} elemList is array with element declarations

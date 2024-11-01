@@ -5,10 +5,7 @@ import React from 'react';
  */
 import { BasicButtonElems } from '../../constants';
 import { TSize } from '../../definitions/proptypes';
-import {
-    genFCElems,
-    getFCTheme,
-} from '../../utils';
+import { genFCElems, getFCTheme } from '../../utils';
 
 export interface Props {
     text: string;
@@ -25,10 +22,21 @@ export interface Props {
  * @returns {JSX.Element}
  */
 export const Dropzone: React.FC<Props> = (props): JSX.Element => {
-    const { text, onClick, sizeId = 'mobile', customize = {}, typeToken = null } = props;
+    const {
+        text,
+        onClick,
+        sizeId = 'mobile',
+        customize = {},
+        typeToken = null,
+    } = props;
 
     const { CWrap, Caption } = genFCElems(BasicButtonElems);
-    const theme = getFCTheme({ FCName: 'Button', typeToken, nodeNames: ['CWrap', 'Caption'], customize });
+    const theme = getFCTheme({
+        FCName: 'Button',
+        typeToken,
+        nodeNames: ['CWrap', 'Caption'],
+        customize,
+    });
 
     // TODO: add hover effect
     return (

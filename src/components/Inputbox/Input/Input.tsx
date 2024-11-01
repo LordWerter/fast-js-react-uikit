@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 
 import { InputElems } from '../../../constants';
 import { TSize } from '../../../definitions/proptypes';
-import {
-    genFCElems,
-    getFCTheme,
-} from '../../../utils';
+import { genFCElems, getFCTheme } from '../../../utils';
 
 export type TLabel = {
     text: string;
@@ -39,10 +36,21 @@ export const Input: React.FC<Props> = (props): JSX.Element => {
 
     const [curValue, setCurValue] = useState(value);
 
-    const { CWrap, Label, InputWrap, InputBox, Placeholder, ResetBtn, Notice } = genFCElems(InputElems);
+    const { CWrap, Label, InputWrap, InputBox, Placeholder, ResetBtn, Notice } =
+        genFCElems(InputElems);
     const theme = getFCTheme({
-            FCName: 'Checkbox', nodeNames: ['CWrap', 'Label', 'InputWrap', 'InputBox', 'Placeholder', 'ResetBtn', 'Notice'], customize
-        });
+        FCName: 'Checkbox',
+        nodeNames: [
+            'CWrap',
+            'Label',
+            'InputWrap',
+            'InputBox',
+            'Placeholder',
+            'ResetBtn',
+            'Notice',
+        ],
+        customize,
+    });
 
     return (
         <CWrap sizeId={sizeId} theme={theme.CWrap}>
@@ -53,7 +61,10 @@ export const Input: React.FC<Props> = (props): JSX.Element => {
             ) : (
                 <></>
             )}
-            <InputWrap sizeId={sizeId} theme={theme.InputWrap} className={isActive ? 'isActive' : ''}>
+            <InputWrap
+                sizeId={sizeId}
+                theme={theme.InputWrap}
+                className={isActive ? 'isActive' : ''}>
                 <InputBox
                     sizeId={sizeId}
                     theme={theme.InputBox}

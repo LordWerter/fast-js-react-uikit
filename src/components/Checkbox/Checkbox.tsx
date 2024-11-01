@@ -5,11 +5,7 @@ import { TSize } from '../../definitions/proptypes';
 /**
  * imports of utils
  */
-import {
-    genFCElems,
-    getElemNodeCST,
-    getFCTheme,
-} from '../../utils';
+import { genFCElems, getElemNodeCST, getFCTheme } from '../../utils';
 
 export type ValueType = string | number;
 
@@ -67,7 +63,7 @@ export interface Props<V = ValueType> {
     typeToken?: string | null;
     hlaToken?: string;
     actionToken?: string;
-};
+}
 
 /**
  * renders Checkbox Instance
@@ -76,49 +72,111 @@ export interface Props<V = ValueType> {
  * @returns {JSX.Element}
  */
 export const Checkbox: React.FC<Props> = (props): JSX.Element => {
-    const { id, sizeId = 'mobile', isChecked = false, isDisabled, label, notice, handleOnClick, handleOnChange, customize = {}, typeToken = null, hlaToken, actionToken, withCoverBtn } = props;
+    const {
+        id,
+        sizeId = 'mobile',
+        isChecked = false,
+        isDisabled,
+        label,
+        notice,
+        handleOnClick,
+        handleOnChange,
+        customize = {},
+        typeToken = null,
+        hlaToken,
+        actionToken,
+        withCoverBtn,
+    } = props;
     const [isCheckedNow, setIsCheckedNow] = useState<boolean>(isChecked);
 
-    const { CWrap, CoverBtn, CheckIcon, Label, HiddenInput, ControlWrap, Notice } = genFCElems(CheckboxElems);
+    const {
+        CWrap,
+        CoverBtn,
+        CheckIcon,
+        Label,
+        HiddenInput,
+        ControlWrap,
+        Notice,
+    } = genFCElems(CheckboxElems);
     const theme = getFCTheme({
-        FCName: 'Checkbox', typeToken, 
-        nodeNames: ['CWrap', 'CheckBtn', 'CheckIcon', 'Label'], customize
+        FCName: 'Checkbox',
+        typeToken,
+        nodeNames: ['CWrap', 'CheckBtn', 'CheckIcon', 'Label'],
+        customize,
     });
 
     const testIds = {
         CWrap: getElemNodeCST(`CHECKBOX__CWRAP`, hlaToken, actionToken),
         CoverBtn: getElemNodeCST(`CHECKBOX__COVER_BTN`, hlaToken, actionToken),
-        ControlWrap: getElemNodeCST(`CHECKBOX__CONTROL_WRAP`, hlaToken, actionToken),
-        CheckIcon: getElemNodeCST(`CHECKBOX__CHECK_ICON`, hlaToken, actionToken),
+        ControlWrap: getElemNodeCST(
+            `CHECKBOX__CONTROL_WRAP`,
+            hlaToken,
+            actionToken
+        ),
+        CheckIcon: getElemNodeCST(
+            `CHECKBOX__CHECK_ICON`,
+            hlaToken,
+            actionToken
+        ),
         Label: getElemNodeCST(`CHECKBOX__LABEL`, hlaToken, actionToken),
         Notice: getElemNodeCST(`CHECKBOX__NOTICE`, hlaToken, actionToken),
     };
 
     return (
         <CWrap sizeId={sizeId} theme={theme.CWrap} data-testid={testIds.CWrap}>
-            <HiddenInput type={'checkbox'} checked={isCheckedNow} disabled={isDisabled} hidden={true}
+            <HiddenInput
+                type={'checkbox'}
+                checked={isCheckedNow}
+                disabled={isDisabled}
+                hidden={true}
                 onChange={(evt: React.MouseEvent<HTMLButtonElement>) => {
                     handleOnChange && handleOnChange(evt);
                 }}
             />
-            <ControlWrap sizeId={sizeId} theme={theme.ControlWrap} data-testid={testIds.ControlWrap}>
-                {withCoverBtn && (<CoverBtn
-                    sizeId={sizeId} theme={theme.CoverBtn} data-testid={testIds.CoverBtn}
+            <ControlWrap
+                sizeId={sizeId}
+                theme={theme.ControlWrap}
+                data-testid={testIds.ControlWrap}>
+                {withCoverBtn && (
+                    <CoverBtn
+                        sizeId={sizeId}
+                        theme={theme.CoverBtn}
+                        data-testid={testIds.CoverBtn}
+                        onClick={(evt: React.MouseEvent<HTMLButtonElement>) => {
+                            handleOnChange && handleOnChange(evt);
+                            handleOnClick && handleOnClick(evt);
+                            setIsCheckedNow(!isChecked);
+                        }}
+                    />
+                )}
+                <CheckIcon
+                    className={isCheckedNow ? 'isChecked' : ''}
+                    sizeId={sizeId}
+                    theme={theme.CheckIcon}
+                    data-testid={testIds.CheckIcon}
                     onClick={(evt: React.MouseEvent<HTMLButtonElement>) => {
-                        handleOnChange && handleOnChange(evt);
-                        handleOnClick && handleOnClick(evt);
-                        setIsCheckedNow(!isChecked);
+                        if (!withCoverBtn) {
+                            handleOnClick && handleOnClick(evt);
+                            setIsCheckedNow(!isChecked);
+                        }
                     }}
-                />)}
-                <CheckIcon className={isCheckedNow ? 'isChecked' : ''} sizeId={sizeId} theme={theme.CheckIcon} data-testid={testIds.CheckIcon} onClick={(evt: React.MouseEvent<HTMLButtonElement>) => {
-                    if (!withCoverBtn) {
-                        handleOnClick && handleOnClick(evt);
-                        setIsCheckedNow(!isChecked);
-                    }
-                }}/>
-                {!!label && (<Label htmlFor={id} sizeId={sizeId} theme={theme.Label} data-testid={testIds.Label}>{label}</Label>)}
+                />
+                {!!label && (
+                    <Label
+                        htmlFor={id}
+                        sizeId={sizeId}
+                        theme={theme.Label}
+                        data-testid={testIds.Label}>
+                        {label}
+                    </Label>
+                )}
             </ControlWrap>
-            <Notice sizeId={sizeId} theme={theme.Notice} data-testid={testIds.Notice}>{notice || ''}</Notice>
+            <Notice
+                sizeId={sizeId}
+                theme={theme.Notice}
+                data-testid={testIds.Notice}>
+                {notice || ''}
+            </Notice>
         </CWrap>
     );
 };

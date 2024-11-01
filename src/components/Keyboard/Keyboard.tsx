@@ -3,11 +3,7 @@ import React, { useState } from 'react';
 import { useTheme } from '@emotion/react';
 
 import { mergeThemeObjects } from '../../utils';
-import {
-    Board,
-    CWrap,
-    Row,
-} from './Keyboard.styles';
+import { Board, CWrap, Row } from './Keyboard.styles';
 import KeyBtn from './KeyBtn';
 import keysTable from './lang';
 import langRows from './langRows';
@@ -87,8 +83,8 @@ export const Keyboard: React.FC<IProps> = (props): JSX.Element => {
                             return activeBoard === 'symbols'
                                 ? setActiveBoard('ru')
                                 : activeBoard === 'ru'
-                                ? setActiveBoard('en')
-                                : setActiveBoard('ru');
+                                  ? setActiveBoard('en')
+                                  : setActiveBoard('ru');
                         }}
                     />
                 );
@@ -110,7 +106,9 @@ export const Keyboard: React.FC<IProps> = (props): JSX.Element => {
     };
 
     return (
-        <CWrap sizeId={sizeId} theme={mergeThemeObjects(theme.container, customize.container)}>
+        <CWrap
+            sizeId={sizeId}
+            theme={mergeThemeObjects(theme.container, customize.container)}>
             {activeBoard === 'ru' && (
                 <Board
                     key={'ru'}
@@ -118,7 +116,10 @@ export const Keyboard: React.FC<IProps> = (props): JSX.Element => {
                     theme={mergeThemeObjects(theme.board, customize.board)}
                     activeBoard={activeBoard}>
                     {langRows.ru.map((row, rowInd) => (
-                        <Row key={rowInd} sizeId={sizeId} theme={mergeThemeObjects(theme.row, customize.row)}>
+                        <Row
+                            key={rowInd}
+                            sizeId={sizeId}
+                            theme={mergeThemeObjects(theme.row, customize.row)}>
                             {row.map((code) => renderRow(code, 'ru'))}
                         </Row>
                     ))}
@@ -131,7 +132,10 @@ export const Keyboard: React.FC<IProps> = (props): JSX.Element => {
                     theme={mergeThemeObjects(theme.board, customize.board)}
                     activeBoard={activeBoard}>
                     {langRows.en.map((row, rowInd) => (
-                        <Row key={rowInd} sizeId={sizeId} theme={mergeThemeObjects(theme.row, customize.row)}>
+                        <Row
+                            key={rowInd}
+                            sizeId={sizeId}
+                            theme={mergeThemeObjects(theme.row, customize.row)}>
                             {row.map((code) => renderRow(code, 'en'))}
                         </Row>
                     ))}
@@ -144,7 +148,10 @@ export const Keyboard: React.FC<IProps> = (props): JSX.Element => {
                     theme={mergeThemeObjects(theme.board, customize.board)}
                     activeBoard={activeBoard}>
                     {langRows.symbols.map((row, rowInd) => (
-                        <Row key={rowInd} sizeId={sizeId} theme={mergeThemeObjects(theme.row, customize.row)}>
+                        <Row
+                            key={rowInd}
+                            sizeId={sizeId}
+                            theme={mergeThemeObjects(theme.row, customize.row)}>
                             {row.map((code) => renderRow(code, 'symbols'))}
                         </Row>
                     ))}

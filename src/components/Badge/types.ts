@@ -1,10 +1,6 @@
 import { CSSObject } from '@emotion/react';
-
-export enum BadgeElemName {
-    CWrap,
-    Caption,
-}
+import { BadgeElemNames } from 'enums';
 
 export type BadgeTheme = {
-    [key in BadgeElemName]: CSSObject;
-}
+    [key in BadgeElemNames]: CSSObject;
+};

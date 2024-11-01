@@ -3,10 +3,7 @@ import React, { useState } from 'react';
 import { TSize } from 'definitions/proptypes';
 
 import { OptionboxElems } from '../../constants';
-import {
-    genFCElems,
-    getFCTheme,
-} from '../../utils';
+import { genFCElems, getFCTheme } from '../../utils';
 
 export interface Props {
     id: string;
@@ -76,29 +73,55 @@ export interface Props {
  * @returns {JSX.Element}
  */
 export const Optionbox: React.FC<Props> = (props): JSX.Element => {
-    const { id, text, Value, handleOnClick, handleOnChange, sizeId = 'mobile', customize = {}, typeToken = null } = props;
+    const {
+        id,
+        text,
+        Value,
+        handleOnClick,
+        handleOnChange,
+        sizeId = 'mobile',
+        customize = {},
+        typeToken = null,
+    } = props;
     const [isActive, setIsActive] = useState(Value);
 
     const { CWrap, RadioBtn, RadioIcon, Label } = genFCElems(OptionboxElems);
     const theme = getFCTheme({
-        FCName: 'Optionbox', typeToken,
-        nodeNames: ['CWrap', 'radioBtn', 'radioicon', 'Label'], customize
+        FCName: 'Optionbox',
+        typeToken,
+        nodeNames: ['CWrap', 'radioBtn', 'radioicon', 'Label'],
+        customize,
     });
 
     return (
-        <CWrap sizeId={sizeId} theme={theme.CWrap} onClick={(evt: Event) => {
-            setIsActive(!isActive);
-            handleOnClick && handleOnClick(evt);
-        }}>
+        <CWrap
+            sizeId={sizeId}
+            theme={theme.CWrap}
+            onClick={(evt: Event) => {
+                setIsActive(!isActive);
+                handleOnClick && handleOnClick(evt);
+            }}>
             <RadioBtn
-                id={id} type={'radio'} checked={isActive} hidden 
-                sizeId={sizeId} theme={theme.radioBtn}
+                id={id}
+                type={'radio'}
+                checked={isActive}
+                hidden
+                sizeId={sizeId}
+                theme={theme.radioBtn}
                 onChange={(evt: Event) => {
                     handleOnChange && handleOnChange(evt);
                 }}
             />
-            <RadioIcon className={isActive ? 'isActive' : ''} sizeId={sizeId} theme={theme.radioicon} />
-            {text && (<Label for={id} sizeId={sizeId} theme={theme.Label}>{text}</Label>)}
+            <RadioIcon
+                className={isActive ? 'isActive' : ''}
+                sizeId={sizeId}
+                theme={theme.radioicon}
+            />
+            {text && (
+                <Label for={id} sizeId={sizeId} theme={theme.Label}>
+                    {text}
+                </Label>
+            )}
             <input type={'radio'} checked={Value} hidden={true} />
         </CWrap>
     );

@@ -9,7 +9,7 @@ export type FCThemeParams = {
     customize?: FCThemeCustoms;
 };
 
-export const getFCTheme = (params:FCThemeParams): FCTheme => {
+export const getFCTheme = (params: FCThemeParams): FCTheme => {
     const { FCName, typeToken = null, nodeNames, customize = {} } = params;
 
     const fullTheme = useTheme();
@@ -17,7 +17,10 @@ export const getFCTheme = (params:FCThemeParams): FCTheme => {
     if (typeToken) targetTheme = { ...targetTheme[typeToken] };
 
     nodeNames.map((nodeName: string) => {
-        targetTheme[nodeName] = mergeThemeObjects(targetTheme[nodeName], customize[nodeName]);
+        targetTheme[nodeName] = mergeThemeObjects(
+            targetTheme[nodeName],
+            customize[nodeName]
+        );
     });
 
     return targetTheme;

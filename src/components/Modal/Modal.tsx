@@ -1,9 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import {
-    genFCElems,
-    getFCTheme,
-} from '../../utils';
+import { genFCElems, getFCTheme } from '../../utils';
 
 export interface ICWrapProps {
     padding: string;
@@ -37,12 +34,20 @@ export const Modal: React.FC<Props> = (props): JSX.Element => {
 
     const requiredThemeKeys = ['CWrap', 'modalwrap', 'closeBtn'];
 
-    const { CWrap, ModalWrap, CloseBtn } = genFCElems([{ name: 'CWrap', tag: 'div' }, { name: 'ModalWrap', tag: 'div' }, { name: 'CloseBtn', tag: 'div' }]);
-    const theme = getFCTheme({ FCName: 'Modal', nodeNames: [...requiredThemeKeys], customize });
+    const { CWrap, ModalWrap, CloseBtn } = genFCElems([
+        { name: 'CWrap', tag: 'div' },
+        { name: 'ModalWrap', tag: 'div' },
+        { name: 'CloseBtn', tag: 'div' },
+    ]);
+    const theme = getFCTheme({
+        FCName: 'Modal',
+        nodeNames: [...requiredThemeKeys],
+        customize,
+    });
 
     return (
         <CWrap sizeId={sizeId} theme={theme.CWrap}>
-            <ModalWrap sizeId={sizeId} theme={theme.modalwrap} role="dialog">
+            <ModalWrap sizeId={sizeId} theme={theme.modalwrap} role='dialog'>
                 {children}
                 <CloseBtn sizeId={sizeId} theme={theme.closeBtn} />
             </ModalWrap>

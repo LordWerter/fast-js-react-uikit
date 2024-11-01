@@ -1,7 +1,10 @@
 import React from 'react';
 
 type ErrorHandler = (error: Error, info: React.ErrorInfo) => void;
-type ErrorHandlingComponent<Props> = (props: Props, error?: Error) => React.ReactNode;
+type ErrorHandlingComponent<Props> = (
+    props: Props,
+    error?: Error
+) => React.ReactNode;
 
 type ErrorState = { error?: Error };
 

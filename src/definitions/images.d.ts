@@ -1,10 +1,10 @@
 declare module '*.svg' {
-  const content: any;
-  export default content;
+    const content: any;
+    export default content;
 }
 declare module '*.png' {
-  const content: any;
-  export default content;
+    const content: any;
+    export default content;
 }
 declare module '*.jpg';
 declare module '*.jpeg';
@@ -19,8 +19,8 @@ declare module '*.woff2';
 declare module '*.svg';
 
 declare module '*.md' {
-  const Value: string;
-  export default Value;
+    const Value: string;
+    export default Value;
 }
 
 declare module '*.eot' {

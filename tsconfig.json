@@ -5,13 +5,13 @@
     "react"
   ],
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "outDir": "dist",
     "target": "es5",
     "sourceMap": true,
 
     "declaration": true,
-    "declarationDir": "./src/definitions",
+    "declarationDir": "src/definitions",
     "declarationMap": true,
 
     "removeComments": true,
@@ -24,7 +24,6 @@
     "noImplicitThis": true,
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "experimentalDecorators": true,
@@ -39,15 +38,16 @@
     ]
   },
   "include": [
-    "src"
+    "*/**/*.ts",
+    "*/**/*.tsx"
   ],
   "exclude": [
-    "<rootDir>/node_modules",
-    "<rootDir>/dist",
-    "<rootDir>/src/**/*.test.tsx",
-    "<rootDir>/src/**/*.test.ts",
-    "<rootDir>/src/**/*.spec.tsx",
-    "<rootDir>/src/**/*.stories.tsx",
-    "<rootDir>/src/**/*.spec.ts"
+    "node_modules",
+    "dist",
+    "*.test.tsx",
+    "*.test.ts",
+    "*.spec.tsx",
+    "*.spec.ts",
+    "*.stories.tsx"
   ],
 }

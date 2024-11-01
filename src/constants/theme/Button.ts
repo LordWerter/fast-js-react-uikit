@@ -13,7 +13,8 @@ export const theme = {
             borderRadius: '12px',
 
             '&:hover': {
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.4), 0 0px 4px inset rgba(255, 255, 255, 0.2)',
+                boxShadow:
+                    '0 2px 4px rgba(0, 0, 0, 0.4), 0 0px 4px inset rgba(255, 255, 255, 0.2)',
                 backgroundColor: '#0c93ff',
             },
         },

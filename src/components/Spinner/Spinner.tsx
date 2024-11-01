@@ -23,7 +23,15 @@ export const Spinner: React.FC<IProps> = (props): JSX.Element => {
 
     // @ts-ignore
     const theme = { ...useTheme().components.Spinner };
-    const requiredThemeKeys = ['container', 'title', 'imagewrap', 'clockimg', 'circle', 'loadingtext', 'images'];
+    const requiredThemeKeys = [
+        'container',
+        'title',
+        'imagewrap',
+        'clockimg',
+        'circle',
+        'loadingtext',
+        'images',
+    ];
 
     requiredThemeKeys.forEach((curKey) => {
         theme[curKey] = mergeThemeObjects(theme[curKey], customize[curKey]);

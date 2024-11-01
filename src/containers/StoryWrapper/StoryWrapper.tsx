@@ -15,12 +15,19 @@ export interface IProps {
 }
 
 export const StoryWrapper: React.FC<IProps> = (props: IProps): JSX.Element => {
-    const { children, theme = null, initialEntries = ['/'], bgColor = 'white' } = props;
+    const {
+        children,
+        theme = null,
+        initialEntries = ['/'],
+        bgColor = 'white',
+    } = props;
 
     return (
         <ThemeProvider theme={theme}>
             <CWrap bgColor={bgColor}>
-                <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
+                <MemoryRouter initialEntries={initialEntries}>
+                    {children}
+                </MemoryRouter>
             </CWrap>
             <GlobalStyles />
         </ThemeProvider>

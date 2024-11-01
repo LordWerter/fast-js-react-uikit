@@ -59,7 +59,11 @@ export const Price: React.FC<Props> = (props): JSX.Element => {
 
     const getFractionDigits = (Value: number) => {
         const targetArr: string[] = `${roundToN(Value, 2)}`.split('.');
-        return targetArr.length === 1 ? '00' : targetArr[1].length === 1 ? `${targetArr[1]}0` : targetArr[1];
+        return targetArr.length === 1
+            ? '00'
+            : targetArr[1].length === 1
+              ? `${targetArr[1]}0`
+              : targetArr[1];
     };
 
     const intValue = `${Value}`.split('.')[0];
@@ -92,7 +96,8 @@ export const Price: React.FC<Props> = (props): JSX.Element => {
                         <FractionValue sizeId={sizeId} theme={theme.fraction}>
                             {fractionValue}
                         </FractionValue>
-                    ) : theme.config.showFraction !== 'notZero' && Number(fractionValue) > 0 ? (
+                    ) : theme.config.showFraction !== 'notZero' &&
+                      Number(fractionValue) > 0 ? (
                         <FractionValue sizeId={sizeId} theme={theme.fraction}>
                             {fractionValue}
                         </FractionValue>
@@ -105,7 +110,10 @@ export const Price: React.FC<Props> = (props): JSX.Element => {
                 {currencies[config.lang]}
             </Сurrency>
             {theme.config.decoration !== 'none' ? (
-                <Line sizeId={sizeId} theme={mergeThemeObjects(theme.line, targetDecoration)} />
+                <Line
+                    sizeId={sizeId}
+                    theme={mergeThemeObjects(theme.line, targetDecoration)}
+                />
             ) : (
                 <></>
             )}

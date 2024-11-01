@@ -4,10 +4,7 @@ import { BasicBtn } from 'components';
 
 import { ButtonsGroupElems } from '../../constants';
 import { TSize } from '../../definitions/proptypes';
-import {
-    genFCElems,
-    getFCTheme,
-} from '../../utils';
+import { genFCElems, getFCTheme } from '../../utils';
 
 export interface BtnDescriptor {
     name?: string;
@@ -27,8 +24,12 @@ export interface Props {
 const ButtonsGroup: React.FC<Props> = (props): JSX.Element => {
     const { sizeId = 'mobile', customize = {}, data, typeToken = '' } = props;
     const { CWrap } = genFCElems(ButtonsGroupElems);
-    const theme = getFCTheme({ FCName: 'ButtonsGroup', typeToken, nodeNames: ['CWrap'], customize });
-
+    const theme = getFCTheme({
+        FCName: 'ButtonsGroup',
+        typeToken,
+        nodeNames: ['CWrap'],
+        customize,
+    });
 
     return (
         <CWrap sizeId={sizeId} theme={theme.container}>

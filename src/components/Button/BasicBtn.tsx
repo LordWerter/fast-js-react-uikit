@@ -1,19 +1,13 @@
+import { BasicButtonElems } from 'enums';
 import React from 'react';
 
 /**
  * imports of utils
  */
-import { BasicButtonElems } from '../../constants';
-import { TSize } from '../../definitions/proptypes';
-import {
-    genFCElems,
-    getElemNodeCST,
-    getFCTheme,
-} from '../../utils';
+import { genFCElems, getElemNodeCST, getFCTheme } from 'utils';
 
 export interface Props {
     caption?: string;
-    sizeId?: TSize;
     customize?: any;
     handleOnClick?: React.MouseEventHandler<HTMLButtonElement>;
     typeToken?: string | null;
@@ -28,10 +22,22 @@ export interface Props {
  * @returns {JSX.Element}
  */
 export const BasicBtn: React.FC<Props> = (props): JSX.Element => {
-    const { caption, sizeId = 'mobile', customize = {}, handleOnClick, typeToken = null, hlaToken, actionToken } = props;
+    const {
+        caption,
+        customize = {},
+        handleOnClick,
+        typeToken = null,
+        hlaToken,
+        actionToken,
+    } = props;
 
-    const { CWrap, Caption } = genFCElems(BasicButtonElems);
-    const theme = getFCTheme({ FCName: 'Button', typeToken, nodeNames: ['CWrap', 'Caption'], customize });
+    const { CWrap, Caption } = genFCElems(Object.keys(BasicButtonElems));
+    const theme = getFCTheme({
+        FCName: 'Button',
+        typeToken,
+        nodeNames: ['CWrap', 'Caption'],
+        customize,
+    });
 
     const testIds = {
         CWrap: getElemNodeCST(`BASIC_BTN__CWRAP`, hlaToken, actionToken),
@@ -39,9 +45,12 @@ export const BasicBtn: React.FC<Props> = (props): JSX.Element => {
     };
 
     return (
-        <CWrap sizeId={sizeId} theme={theme.CWrap} data-testid={testIds.CWrap} onClick={handleOnClick}>
+        <CWrap
+            theme={theme.CWrap}
+            data-testid={testIds.CWrap}
+            onClick={handleOnClick}>
             {!!caption && (
-                <Caption sizeId={sizeId} theme={theme.Caption} data-testid={testIds.Caption}>
+                <Caption theme={theme.Caption} data-testid={testIds.Caption}>
                     {caption}
                 </Caption>
             )}

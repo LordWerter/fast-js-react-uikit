@@ -1,16 +1,12 @@
 import React from 'react';
 
 import { LabelElems } from '../../constants';
-import {
-    genFCElems,
-    getElemNodeCST,
-    getFCTheme,
-} from '../../utils';
+import { genFCElems, getElemNodeCST, getFCTheme } from '../../utils';
 
 export interface Props {
     text: number | string;
-    prefix: string,
-    postfix: string,
+    prefix: string;
+    postfix: string;
     sizeId?: any;
     customize?: any;
     typeToken?: string | null;
@@ -19,14 +15,25 @@ export interface Props {
 }
 
 export const Label: React.FC<Props> = (props): JSX.Element => {
-    const { text, prefix, postfix, sizeId = 'mobile', customize = {}, typeToken = null, hlaToken, actionToken } = props;
+    const {
+        text,
+        prefix,
+        postfix,
+        sizeId = 'mobile',
+        customize = {},
+        typeToken = null,
+        hlaToken,
+        actionToken,
+    } = props;
 
     const nodeNameList = ['CWrap', 'Prefix', 'Postfix'];
 
     const { CWrap, Prefix, Postfix } = genFCElems(LabelElems);
     const theme = getFCTheme({
-        FCName: 'Dropbox', typeToken, 
-        nodeNames: [...nodeNameList], customize
+        FCName: 'Dropbox',
+        typeToken,
+        nodeNames: [...nodeNameList],
+        customize,
     });
 
     const testIds = {
@@ -37,11 +44,17 @@ export const Label: React.FC<Props> = (props): JSX.Element => {
 
     return (
         <CWrap sizeId={sizeId} theme={theme.CWrap} data-testid={testIds.CWrap}>
-            <Prefix sizeId={sizeId} theme={theme.Prefix} data-testid={testIds.Prefix}>
+            <Prefix
+                sizeId={sizeId}
+                theme={theme.Prefix}
+                data-testid={testIds.Prefix}>
                 {prefix}
             </Prefix>
             {text}
-            <Postfix sizeId={sizeId} theme={theme.Postfix} data-testid={testIds.Postfix}>
+            <Postfix
+                sizeId={sizeId}
+                theme={theme.Postfix}
+                data-testid={testIds.Postfix}>
                 {postfix}
             </Postfix>
         </CWrap>

@@ -31,7 +31,6 @@ export const theme = {
             '&.isChecked': {
                 backgroundPosition: '-47px center',
             },
-
         },
         mobile: {},
         tablet: {},

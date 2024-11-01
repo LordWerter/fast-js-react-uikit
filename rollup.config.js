@@ -3,37 +3,37 @@ import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import pkg from './package.json';
 
-const extensions = [
-  '.js', '.jsx', '.ts', '.tsx',
-];
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 // Excluded dependencies
 const EXTERNAL = Object.keys(pkg.devDependencies);
 
 const name = 'FastJSReactUIKit';
 
 export default {
-  input: 'src/index.tsx',
+    input: 'src/index.tsx',
 
-  plugins: [
-    // Allows node_modules resolution
-    resolve({ extensions }),
+    plugins: [
+        // Allows node_modules resolution
+        resolve({ extensions }),
 
-    // Allow bundling cjs modules. Rollup doesn't understand cjs
-    commonjs(),
+        // Allow bundling cjs modules. Rollup doesn't understand cjs
+        commonjs(),
 
-    // Compile TypeScript/JavaScript files
-    babel({
-      extensions,
-      babelHelpers: 'bundled',
-      include: extensions.map(ext => `src/**/*${ext}`)
-    }),
-  ],
+        // Compile TypeScript/JavaScript files
+        babel({
+            extensions,
+            babelHelpers: 'bundled',
+            include: extensions.map((ext) => `src/**/*${ext}`),
+        }),
+    ],
 
-  output: [{
-    name,
-    file: pkg.main,
-    sourcemap: false,
-    format: "esm",
-  }],
-  external: EXTERNAL
+    output: [
+        {
+            name,
+            file: pkg.main,
+            sourcemap: false,
+            format: 'esm',
+        },
+    ],
+    external: EXTERNAL,
 };

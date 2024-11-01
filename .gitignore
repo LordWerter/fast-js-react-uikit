@@ -20,3 +20,5 @@ dist
 
 # Environment variables file
 .env
+
+.yarn

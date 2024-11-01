@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-    ComponentMeta,
-    ComponentStory,
-} from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { mockedTheme } from '../../constants';
 import StoryWrapper from '../../containers/StoryWrapper';
@@ -11,8 +8,8 @@ import Counter from './Counter';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Counter',
-  component: Counter,
+    title: 'Counter',
+    component: Counter,
 } as ComponentMeta<typeof Counter>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

@@ -3,9 +3,12 @@ import Catch from './FunctionalErrorBoundary';
 
 export interface IProps {
     children: React.ReactNode;
-};
+}
 
-export const ErrorBoundary = Catch(function MyErrorBoundary(props: IProps, error?: Error) {
+export const ErrorBoundary = Catch(function MyErrorBoundary(
+    props: IProps,
+    error?: Error
+) {
     if (error) {
         return (
             <>

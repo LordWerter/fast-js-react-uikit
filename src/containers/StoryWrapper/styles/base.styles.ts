@@ -10,7 +10,8 @@ const BaseStyle = css`
         font-style: normal;
         font-weight: bold;
         src: url('assets/fonts/ProximaNovaBold.eot');
-        src: url('assets/fonts/ProximaNovaBold.woff') format('woff'),
+        src:
+            url('assets/fonts/ProximaNovaBold.woff') format('woff'),
             url('assets/fonts/ProximaNovaBold.woff2') format('woff2');
     }
 
@@ -19,7 +20,8 @@ const BaseStyle = css`
         font-style: normal;
         font-weight: normal;
         src: url('assets/fonts/ProximaNovaRegular.eot');
-        src: url('assets/fonts/ProximaNovaRegular.woff') format('woff'),
+        src:
+            url('assets/fonts/ProximaNovaRegular.woff') format('woff'),
             url('assets/fonts/ProximaNovaRegular.woff2') format('woff2');
     }
 

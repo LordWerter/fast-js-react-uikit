@@ -1,7 +1,4 @@
-import {
-    RADIO_Btn__ACTIVE,
-    RADIO_Btn__PASSIVE,
-} from './imgs';
+import { RADIO_Btn__ACTIVE, RADIO_Btn__PASSIVE } from './imgs';
 
 export const theme = {
     CWrap: {
@@ -35,7 +32,6 @@ export const theme = {
             '&.isActive': {
                 backgroundImage: `url('${RADIO_Btn__ACTIVE}')`,
             },
-
         },
         mobile: {},
         tablet: {},

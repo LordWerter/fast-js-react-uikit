@@ -22,9 +22,7 @@ export const SwitchBtn = [
     { name: 'Caption', tag: 'span' },
 ];
 
-export const ButtonsGroup = [
-    { name: 'CWrap', tag: 'button' },
-];
+export const ButtonsGroup = [{ name: 'CWrap', tag: 'button' }];
 
 export const Checkbox = [
     { name: 'CWrap', tag: 'div' },
@@ -36,9 +34,7 @@ export const Checkbox = [
     { name: 'Notice', tag: 'p' },
 ];
 
-export const CheckboxGroup = [
-    { name: 'CWrap', tag: 'div' },
-];
+export const CheckboxGroup = [{ name: 'CWrap', tag: 'div' }];
 
 export const Counter = [
     { name: 'CWrap', tag: 'div' },
@@ -80,9 +76,7 @@ export const Keyboard = [
     { name: 'KeyBtn', tag: 'button' },
 ];
 
-export const Label = [
-    { name: 'CWrap', tag: 'label' },
-];
+export const Label = [{ name: 'CWrap', tag: 'label' }];
 
 export const Logo = [
     { name: 'CWrap', tag: 'div' },
@@ -126,9 +120,7 @@ export const Optionbox = [
     { name: 'Notice', tag: 'p' },
 ];
 
-export const OptionsGroup = [
-    { name: 'CWrap', tag: 'div' },
-];
+export const OptionsGroup = [{ name: 'CWrap', tag: 'div' }];
 
 export const Select = [
     { name: 'CWrap', tag: 'div' },
@@ -137,9 +129,7 @@ export const Select = [
     { name: 'Notice', tag: 'p' },
 ];
 
-export const Section = [
-    { name: 'CWrap', tag: 'div' },
-];
+export const Section = [{ name: 'CWrap', tag: 'div' }];
 
 export const Slider = [
     { name: 'CWrap', tag: 'div' },
@@ -174,7 +164,6 @@ export const SymbCount = [
     { name: 'CurNum', tag: 'span' },
     { name: 'MaxNum', tag: 'span' },
 ];
-
 
 export const TextBlock = [
     { name: 'H1', tag: 'h1' },

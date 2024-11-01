@@ -13,7 +13,7 @@ const ResetStyle = css`
     html,
     body {
         box-sizing: border-box;
-        padding: 0!important;
+        padding: 0 !important;
         width: 100vw;
         height: 100vh;
     }

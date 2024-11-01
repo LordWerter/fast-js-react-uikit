@@ -5,11 +5,7 @@ import { useTheme } from '@emotion/react';
 import { mergeThemeObjects } from '../../utils';
 import Image from '../Image';
 import symbols from './lang/symbols';
-import {
-    CWrap,
-    Key,
-    Row,
-} from './Number.styles';
+import { CWrap, Key, Row } from './Number.styles';
 import numRows from './numRows';
 
 export interface IProps {
@@ -27,9 +23,14 @@ export const Number: React.FC<IProps> = (props): JSX.Element => {
     const keyIcons = { ...theme.images };
 
     return (
-        <CWrap sizeId={sizeId} theme={mergeThemeObjects(theme.container, customize.container)}>
+        <CWrap
+            sizeId={sizeId}
+            theme={mergeThemeObjects(theme.container, customize.container)}>
             {numRows.map((row, rowInd) => (
-                <Row key={rowInd} sizeId={sizeId} theme={mergeThemeObjects(theme.row, customize.row)}>
+                <Row
+                    key={rowInd}
+                    sizeId={sizeId}
+                    theme={mergeThemeObjects(theme.row, customize.row)}>
                     {row.map((code, index) => (
                         <Key
                             key={index}
@@ -38,10 +39,14 @@ export const Number: React.FC<IProps> = (props): JSX.Element => {
                             onClick={() => {
                                 const keyValue = symbols[code];
                                 const codeValue = code;
-                                if (handleOnClick) handleOnClick(codeValue, keyValue);
+                                if (handleOnClick)
+                                    handleOnClick(codeValue, keyValue);
                             }}>
                             {code === '2' || code === '8' ? (
-                                <Image customize={theme.image} bgImage={keyIcons[symbols[code]]} />
+                                <Image
+                                    customize={theme.image}
+                                    bgImage={keyIcons[symbols[code]]}
+                                />
                             ) : (
                                 symbols[code]
                             )}

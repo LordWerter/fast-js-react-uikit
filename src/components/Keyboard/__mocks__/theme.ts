@@ -8,7 +8,7 @@ export default {
                 m: {},
                 l: {},
                 xl: {
-                    background: "#ccc"
+                    background: '#ccc',
                 },
             },
         },
@@ -19,8 +19,7 @@ export default {
                 s: {},
                 m: {},
                 l: {},
-                xl: {
-                },
+                xl: {},
             },
             board: {
                 core: {},
@@ -47,7 +46,7 @@ export default {
                 m: {},
                 l: {},
                 xl: {
-                    borderRadius: '10px'
+                    borderRadius: '10px',
                 },
             },
             row: {
@@ -57,7 +56,7 @@ export default {
                 m: {},
                 l: {},
                 xl: {
-                    borderRadius: '10px'
+                    borderRadius: '10px',
                 },
             },
             key: {
@@ -67,9 +66,9 @@ export default {
                 m: {},
                 l: {},
                 xl: {
-                    borderRadius: '10px'
+                    borderRadius: '10px',
                 },
             },
         },
     },
-}
+};

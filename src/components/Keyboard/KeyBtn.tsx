@@ -18,7 +18,15 @@ export interface IProps {
 }
 
 export const KeyBtn: React.FC<IProps> = (props): JSX.Element => {
-    const { sizeId = 'mobile', customize = {}, boardId, keyCode, keyValue, capslock, callback } = props;
+    const {
+        sizeId = 'mobile',
+        customize = {},
+        boardId,
+        keyCode,
+        keyValue,
+        capslock,
+        callback,
+    } = props;
 
     // @ts-ignore
     const theme = { ...useTheme().components.KeyBtn };
@@ -40,7 +48,11 @@ export const KeyBtn: React.FC<IProps> = (props): JSX.Element => {
     switch (keyCode) {
         case '16':
         case '8':
-            boardId === 'ru' ? (width = 100 / 12 + 100 / 12 / 2) : boardId !== 'symbols' ? (width = 15) : (width = 10);
+            boardId === 'ru'
+                ? (width = 100 / 12 + 100 / 12 / 2)
+                : boardId !== 'symbols'
+                  ? (width = 15)
+                  : (width = 10);
             break;
         case '1':
         case '0':

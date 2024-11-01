@@ -29,10 +29,19 @@ const CheckBoxBar: React.FC<IProps> = (props): JSX.Element => {
     const theme = { ...useTheme().containers.CheckBoxBar };
 
     return (
-        <CWrap sizeId={sizeId} theme={mergeThemeObjects(theme.container, customize.container)}>
+        <CWrap
+            sizeId={sizeId}
+            theme={mergeThemeObjects(theme.container, customize.container)}>
             {data &&
                 data.map((item: any): JSX.Element => {
-                    const { key, hash, label, handleOnChange, notice, isChecked } = item;
+                    const {
+                        key,
+                        hash,
+                        label,
+                        handleOnChange,
+                        notice,
+                        isChecked,
+                    } = item;
                     return (
                         <Checkbox
                             key={key}

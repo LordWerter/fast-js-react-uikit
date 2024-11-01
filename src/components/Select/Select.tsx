@@ -5,12 +5,7 @@ import { useTheme } from '@emotion/react';
 import { TSize } from '../../definitions/proptypes';
 import { mergeThemeObjects } from '../../utils';
 import Image from '../Image';
-import {
-    CWrap,
-    Label,
-    List,
-    MainBtn,
-} from './Select.styles';
+import { CWrap, Label, List, MainBtn } from './Select.styles';
 
 export interface IProps {
     sizeId: TSize;
@@ -21,13 +16,21 @@ export interface IProps {
 }
 
 export const Select: React.FC<any> = (props): JSX.Element => {
-    const { sizeId = 'mobile', customize = {}, LabelImg, LabelText, items } = props;
+    const {
+        sizeId = 'mobile',
+        customize = {},
+        LabelImg,
+        LabelText,
+        items,
+    } = props;
 
     const [lblImg, setLabelImg] = useState(LabelImg);
     const [listVisibility, setListVisibility] = useState<boolean>(false);
     // @ts-ignore
     const handleListVisibility = (event: any, status?: boolean) => {
-        status !== undefined ? setListVisibility(status) : setListVisibility(!listVisibility);
+        status !== undefined
+            ? setListVisibility(status)
+            : setListVisibility(!listVisibility);
     };
 
     // @ts-ignore
@@ -39,9 +42,19 @@ export const Select: React.FC<any> = (props): JSX.Element => {
     return (
         <CWrap sizeId={sizeId} theme={theme.container}>
             <MainBtn sizeId={sizeId} theme={theme.mainBtn}>
-                <Label sizeId={sizeId} theme={theme.Label} onClick={handleListVisibility}>
-                    <Image sizeId={sizeId} customize={theme.LabelImg} bgImage={theme.images[lblImg]} />
-                    <LabelText sizeId={sizeId} theme={theme.LabelText} hasImage={!!lblImg}>
+                <Label
+                    sizeId={sizeId}
+                    theme={theme.Label}
+                    onClick={handleListVisibility}>
+                    <Image
+                        sizeId={sizeId}
+                        customize={theme.LabelImg}
+                        bgImage={theme.images[lblImg]}
+                    />
+                    <LabelText
+                        sizeId={sizeId}
+                        theme={theme.LabelText}
+                        hasImage={!!lblImg}>
                         {LabelText}
                     </LabelText>
                 </Label>
@@ -61,11 +74,18 @@ export const Select: React.FC<any> = (props): JSX.Element => {
                                 handleListVisibility(event, false);
                             }}>
                             {item.iconVisibility ? (
-                                <Image sizeId={sizeId} customize={theme.LabelImg} bgImage={theme.images[item.id]} />
+                                <Image
+                                    sizeId={sizeId}
+                                    customize={theme.LabelImg}
+                                    bgImage={theme.images[item.id]}
+                                />
                             ) : (
                                 <></>
                             )}
-                            <LabelText sizeId={sizeId} theme={theme.LabelText} hasImage={!!item.id}>
+                            <LabelText
+                                sizeId={sizeId}
+                                theme={theme.LabelText}
+                                hasImage={!!item.id}>
                                 {`${item.text}>${item.text}`}
                             </LabelText>
                         </Label>

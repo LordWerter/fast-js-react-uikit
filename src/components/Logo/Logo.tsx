@@ -4,11 +4,7 @@ import { useTheme } from '@emotion/react';
 
 import { TSize } from '../../definitions/proptypes';
 import { mergeThemeObjects } from '../../utils';
-import {
-    CWrap,
-    Image,
-    Text,
-} from './Logo.styles';
+import { CWrap, Image, Text } from './Logo.styles';
 
 export type TLogoRenderType =
     | 'ICON__COLOR'
@@ -65,7 +61,10 @@ export const Logo: React.FC<Props> = (props): JSX.Element => {
     // @ts-ignore
     const theme: { [key in string]: any } = { ...useTheme().components.Logo };
     Object.keys(theme).forEach((elementName: string) => {
-        theme[elementName] = mergeThemeObjects(theme[elementName], customize[elementName]);
+        theme[elementName] = mergeThemeObjects(
+            theme[elementName],
+            customize[elementName]
+        );
     });
 
     return (

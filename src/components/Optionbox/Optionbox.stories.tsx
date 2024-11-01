@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-    ComponentMeta,
-    ComponentStory,
-} from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { mockedTheme } from '../../constants';
 import StoryWrapper from '../../containers/StoryWrapper';
@@ -11,8 +8,8 @@ import Optionbox from './Optionbox';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Optionbox',
-  component: Optionbox,
+    title: 'Optionbox',
+    component: Optionbox,
 } as ComponentMeta<typeof Optionbox>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -31,5 +28,5 @@ Basic.args = {
     customize: {},
     onClick: () => {
         console.warn('Optionbox onClick is OK!');
-    }
+    },
 };

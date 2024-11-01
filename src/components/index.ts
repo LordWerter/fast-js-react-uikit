@@ -1,5 +1,9 @@
 export { BasicBtn, SelectorBtn, SwitchBtn } from './Button';
-export type { TBasicBtnProps, TSelectorBtnProps, TSwitchBtnProps } from './Button';
+export type {
+    TBasicBtnProps,
+    TSelectorBtnProps,
+    TSwitchBtnProps,
+} from './Button';
 
 export { Checkbox } from './Checkbox';
 export type { TCheckboxProps } from './Checkbox';

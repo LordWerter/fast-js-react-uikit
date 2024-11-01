@@ -2,10 +2,7 @@ import React from 'react';
 
 import { SymbCountElems } from '../../constants';
 import { TSize } from '../../definitions/proptypes';
-import {
-    genFCElems,
-    getFCTheme,
-} from '../../utils';
+import { genFCElems, getFCTheme } from '../../utils';
 
 export interface Props {
     sizeId: TSize;
@@ -18,7 +15,11 @@ export const SymbCount: React.FC<Props> = (props): JSX.Element => {
     const { sizeId = 'mobile', customize = {}, curNum, maxNum } = props;
 
     const { CWrap, CurNum, MaxNum } = genFCElems(SymbCountElems);
-    const theme = getFCTheme({ FCName: 'SymbCount', nodeNames: ['CWrap', 'curnum', 'maxnum'], customize });
+    const theme = getFCTheme({
+        FCName: 'SymbCount',
+        nodeNames: ['CWrap', 'curnum', 'maxnum'],
+        customize,
+    });
 
     const persent = Math.ceil((curNum / maxNum) * 100);
 
@@ -27,11 +28,19 @@ export const SymbCount: React.FC<Props> = (props): JSX.Element => {
             <CurNum
                 sizeId={sizeId}
                 theme={theme.curnum}
-                className={persent >= 100 ? 'isInvalid' : persent >= 80 ? 'isWarning' : ''}
-            >{curNum}</CurNum> / <MaxNum
-                sizeId={sizeId}
-                theme={theme.maxnum}
-            >{maxNum}</MaxNum>
+                className={
+                    persent >= 100
+                        ? 'isInvalid'
+                        : persent >= 80
+                          ? 'isWarning'
+                          : ''
+                }>
+                {curNum}
+            </CurNum>{' '}
+            /{' '}
+            <MaxNum sizeId={sizeId} theme={theme.maxnum}>
+                {maxNum}
+            </MaxNum>
         </CWrap>
     );
 };

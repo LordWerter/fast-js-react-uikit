@@ -3,12 +3,7 @@ import React from 'react';
 import { useTheme } from '@emotion/react';
 
 import { TSize } from '../../definitions/proptypes';
-import {
-    CWrap,
-    Description,
-    SectionContent,
-    Title,
-} from './Section.styles';
+import { CWrap, Description, SectionContent, Title } from './Section.styles';
 
 export type IProps = {
     sizeId?: TSize;
@@ -25,14 +20,30 @@ export const Section: React.FC<IProps> = (props): JSX.Element => {
     const theme = { ...useTheme().Section[sectionType] };
 
     return (
-        <CWrap sizeId={sizeId} theme={theme.CWrap} data-testid={'section__CWrap'}>
-            <SectionContent sizeId={sizeId} theme={theme.sectioncontent} data-testid={'section__section-content'}>
-                {langs?.title && <Title sizeId={sizeId} theme={theme.title} data-testid={'section__title'}>
-                    {langs.title}
-                </Title>}
-                {langs?.description && <Description sizeId={sizeId} theme={theme.description} data-testid={'section__description'}>
-                    {langs.description}
-                </Description>}
+        <CWrap
+            sizeId={sizeId}
+            theme={theme.CWrap}
+            data-testid={'section__CWrap'}>
+            <SectionContent
+                sizeId={sizeId}
+                theme={theme.sectioncontent}
+                data-testid={'section__section-content'}>
+                {langs?.title && (
+                    <Title
+                        sizeId={sizeId}
+                        theme={theme.title}
+                        data-testid={'section__title'}>
+                        {langs.title}
+                    </Title>
+                )}
+                {langs?.description && (
+                    <Description
+                        sizeId={sizeId}
+                        theme={theme.description}
+                        data-testid={'section__description'}>
+                        {langs.description}
+                    </Description>
+                )}
                 {children}
             </SectionContent>
         </CWrap>
